@@ -17,10 +17,12 @@ async function handleRequest(request) {
     const recipe_context = `${get_ld_json(data)}(${url})`;
 
     let res = new Response(recipe_context, { status: 200 });
-    // res.headers.set("Content-type", "application/json");
     return res;
   }
-  return new Response("ERROR. No Body POST'd", { status: 403 });
+  return new Response(
+    "ERROR. No url passed to perform conversion to markdown",
+    { status: 400 }
+  );
 }
 
 function get(name, url) {
