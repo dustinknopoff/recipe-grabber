@@ -1,9 +1,9 @@
-mod utils;
 mod ld_types;
+mod utils;
 use cfg_if::cfg_if;
+use ld_types::Recipe;
 use scraper::{Html, Selector};
 use wasm_bindgen::prelude::*;
-use ld_types::Recipe;
 
 cfg_if! {
     // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global

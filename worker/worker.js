@@ -7,13 +7,14 @@ addEventListener("fetch", (event) => {
  * @param {Request} request
  */
 async function handleRequest(request) {
-  if (get("url", request.url)) {
+  let url = get("url", request.url);
+  if (url) {
     const { get_ld_json } = wasm_bindgen;
     await wasm_bindgen(wasm);
 
-    let data = await fetch(get("url", request.url)).then((r) => r.text());
+    let data = await fetch(url).then((r) => r.text());
 
-    const recipe_context = get_ld_json(data);
+    const recipe_context = `${get_ld_json(data)}(${url})`;
 
     let res = new Response(recipe_context, { status: 200 });
     // res.headers.set("Content-type", "application/json");

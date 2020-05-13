@@ -11,7 +11,7 @@
 //     let model: [object Object] = serde_json::from_str(&json).unwrap();
 // }
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Recipe {
@@ -51,7 +51,8 @@ impl Recipe {
     pub fn as_md(&mut self) -> String {
         self.clean_total_time();
         self.categories_as_tags();
-        format!(r#"# {}
+        format!(
+            r#"# {}
 
 By: {}
 
@@ -69,40 +70,55 @@ Yields: {} in {}
 
 {}
 
-Source: [{}]
-        "#, self.name, self.author.name, self.image, self.description, option_or_empty(self.recipe_yield.clone()), option_or_empty(self.total_time.clone()), option_or_empty(self.recipe_cuisine.clone()), option_or_empty(self.recipe_category.clone()),
-        Self::ul(self.recipe_ingredient.clone(), String::from("Ingredients")),
-        Self::ol(self.recipe_instructions.iter().map(|x| x.simplify()).collect::<Vec<_>>(), String::from("Ingredients")),
-        option_or_empty(self.nutrition.clone().map(|x|x.as_md())),
-        self.name
-    )
+Source: [{}]"#,
+            self.name,
+            self.author.name,
+            self.image,
+            self.description,
+            option_or_empty(self.recipe_yield.clone()),
+            option_or_empty(self.total_time.clone()),
+            option_or_empty(self.recipe_cuisine.clone()),
+            option_or_empty(self.recipe_category.clone()),
+            Self::ul(self.recipe_ingredient.clone(), String::from("Ingredients")),
+            Self::ol(
+                self.recipe_instructions
+                    .iter()
+                    .map(|x| x.simplify())
+                    .collect::<Vec<_>>(),
+                String::from("Ingredients")
+            ),
+            option_or_empty(self.nutrition.clone().map(|x| x.as_md())),
+            self.name
+        )
     }
 
-
-
     fn clean_total_time(&mut self) {
-        self.total_time = self.total_time.clone().map(|x| 
-            x.replace("PT", "")
-            .replace("H", "h ")
-            .replace("M", "m"));
+        self.total_time = self
+            .total_time
+            .clone()
+            .map(|x| x.replace("PT", "").replace("H", "h ").replace("M", "m"));
     }
 
     fn categories_as_tags(&mut self) {
-        self.recipe_category = self.recipe_category.clone()
-        .map(|x| x.split(", ").map(|y| format!("#{}",y.replace(" ", "_"))).collect::<Vec<_>>().join(" "));
+        self.recipe_category = self.recipe_category.clone().map(|x| {
+            x.split(", ")
+                .map(|y| format!("#{}", y.replace(" ", "_")))
+                .collect::<Vec<_>>()
+                .join(" ")
+        });
     }
 
-    fn ul(list: Vec<String>, title : String) -> String {
+    fn ul(list: Vec<String>, title: String) -> String {
         let mut out = format!("## {}\n", title);
         for item in list.iter() {
             out.push_str(&format!("- {}\n", item))
         }
         out
     }
-    fn ol(list: Vec<String>, title : String) -> String {
+    fn ol(list: Vec<String>, title: String) -> String {
         let mut out = format!("## {}\n", title);
-        for (idx,item) in list.iter().enumerate() {
-            out.push_str(&format!("{}. {}\n", idx+1,item))
+        for (idx, item) in list.iter().enumerate() {
+            out.push_str(&format!("{}. {}\n", idx + 1, item))
         }
         out
     }
@@ -156,7 +172,8 @@ pub struct Nutrition {
 
 impl Nutrition {
     fn as_md(&self) -> String {
-        format!(r#"### Nutrition
+        format!(
+            r#"### Nutrition
 - calories: {}
 - unsaturated fat: {}
 - carbohydrate: {}
@@ -169,18 +186,18 @@ impl Nutrition {
 - sugar: {}
 - trans fat: {}
         "#,
-    self.calories,
-    self.unsaturated_fat_content,
-    self.carbohydrate_content,
-    option_or_empty(self.cholesterol_content.clone()),
-    self.fat_content,
-    self.fiber_content,
-    self.protein_content,
-    self.saturated_fat_content,
-    self.sodium_content,
-    self.sugar_content,
-    self.trans_fat_content
-)
+            self.calories,
+            self.unsaturated_fat_content,
+            self.carbohydrate_content,
+            option_or_empty(self.cholesterol_content.clone()),
+            self.fat_content,
+            self.fiber_content,
+            self.protein_content,
+            self.saturated_fat_content,
+            self.sodium_content,
+            self.sugar_content,
+            self.trans_fat_content
+        )
     }
 }
 #[derive(Debug, Serialize, Deserialize)]
