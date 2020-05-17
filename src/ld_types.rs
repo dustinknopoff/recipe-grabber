@@ -85,7 +85,7 @@ Source: [{}]"#,
                     .iter()
                     .map(|x| x.simplify())
                     .collect::<Vec<_>>(),
-                String::from("Ingredients")
+                String::from("Instructions")
             ),
             option_or_empty(self.nutrition.clone().map(|x| x.as_md())),
             self.name
