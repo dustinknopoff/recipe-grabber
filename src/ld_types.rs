@@ -167,7 +167,7 @@ pub struct Nutrition {
     #[serde(rename = "sugarContent")]
     pub(crate) sugar_content: String,
     #[serde(rename = "transFatContent")]
-    pub(crate) trans_fat_content: String,
+    pub(crate) trans_fat_content: Option<String>,
 }
 
 impl Nutrition {
@@ -196,7 +196,7 @@ impl Nutrition {
             self.saturated_fat_content,
             self.sodium_content,
             self.sugar_content,
-            self.trans_fat_content
+            option_or_empty(self.trans_fat_content.clone())
         )
     }
 }
@@ -228,4 +228,17 @@ pub struct Video {
     #[serde(rename = "uploadDate")]
     pub(crate) upload_date: String,
     pub(crate) duration: String,
+}
+
+#[cfg(test)]
+mod tests {
+
+    use super::Recipe;
+
+    #[test]
+    fn ragu() {
+        let src = include_str!("../tests/ragu.json");
+        let mut as_recipe: Recipe = serde_json::from_str(&src).unwrap();
+        eprintln!("{}", as_recipe.as_md());
+    }
 }
