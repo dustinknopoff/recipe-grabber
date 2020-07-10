@@ -1,0 +1,52 @@
+{
+    "@context": "http://schema.org",
+    "@type": "Recipe",
+    "mainEntityOfPage": "https://www.foodandwine.com/recipes/dinner-hummus-spiced-chicken-and-cauliflower",
+    "name": "Dinner Hummus with Spiced Chicken and Cauliflower",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.foodandwine.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1580741990%2Fdinner-hummus-chicken-and-cauliflower-FT-RECIPE0220.jpg%3Fitok%3DsGaAnb-T",
+        "width": null,
+        "height": null,
+        "caption": "dinner-hummus-chicken-and-cauliflower-FT-RECIPE0220.jpg"
+    },
+    "datePublished": "2020-02-03T16:21:10.000Z",
+    "description": "In America, hummus has largely been designated as a snack food—a little nosh to tide you over until the next meal or to absentmindedly nibble while focusing on something else. I often turn to hummus and veggies as a makeshift appetizer while cooking. It’s substantial enough to quiet a rumbling belly while light enough to not ruin dinner.\r\n\r\nBut sometimes hummus itself is dinner—full stop and with no regrets. Because when you abandon the store-bought tubs and make your own hummus, whipped and dreamy with formidable glugs of tahini and olive oil and just enough lemon and garlic to highlight the decadence of it all, everyone’s favorite appetizer suddenly becomes worthy of main-dish status.\r\n\r\nServing hummus at the center of the table is common practice in the Middle East, where it’s eaten for breakfast, lunch, and dinner. The creamy chickpea spread is often topped with sautéed mushrooms or eggplant, browned ground lamb and onions, saucy fava beans, or similar hearty add-ons. I’ve tried (and adored) all of these versions, but the dinner hummus of my dreams is capped with a generous layer of chicken and cauliflower. Flavored with a shawarma-inspired array of spices—cumin, smoked paprika, coriander—and sautéed with plenty of onions, buttery pine nuts, and sweet-tart currents, hummus is transformed into a fully satisfying meal.\r\n\r\nJust like snack-time hummus, dinner hummus tastes best with pita (though if a gluten-free friend is joining the dinner table, I also make sure to have a sturdy gluten-free cracker on hand so they can dip with abandon). Start with pita that is either super fresh and plush or cut into wedges, drizzled with a little olive oil, and lightly toasted until crisp and golden. With a few pita rounds between us, my husband and I can swipe our way through an embarrassing amount of this hummus. With a glass of wine in hand and, if I’m feeling up to the task, a green salad on the table, dinner is served.",
+    "prepTime": null,
+    "cookTime": null,
+    "totalTime": "PT60M",
+    "recipeYield": "Serves : 6\r\n",
+    "recipeIngredient": [
+        "2 (15.5-ounce) cans chickpeas, drained, 1/2 cup chickpea liquid reserved, divided\r\n",
+        "1/3 cup tahini\r\n",
+        "1/4 cup extra-virgin olive oil\r\n",
+        "3 tablespoons fresh lemon juice\r\n",
+        "1 1/2 teaspoons kosher salt, plus more to taste\r\n",
+        "1 large garlic clove, coarsely chopped\r\n",
+        "1 pound boneless, skinless chicken thighs, cut into 1-inch pieces\r\n",
+        "2 teaspoons ground cumin\r\n",
+        "1 teaspoon smoked paprika\r\n",
+        "1 teaspoon kosher salt, plus more to taste\r\n",
+        "3/4 teaspoon ground coriander\r\n",
+        "1/2 teaspoon ground cinnamon\r\n",
+        "1/4 teaspoon black pepper\r\n",
+        "1/4 cup extra-virgin olive oil, divided, plus more for drizzling\r\n",
+        "1 large yellow onion, thinly sliced\r\n",
+        "1/2 small head cauliflower, cored and cut into small florets (about 2 1/4 cups)\r\n",
+        "1/3 cup water\r\n",
+        "1/4 cup dried currants\r\n",
+        "Chopped fresh flat-leaf parsley, za’atar, and toasted pine nuts, for serving\r\n"
+    ],
+    "recipeInstructions": "Process chickpeas, tahini, oil, lemon juice, salt, and garlic in a food processor until a coarse paste forms, about 20 seconds, stopping to scrape down sides as needed. With processor running, slowly pour 1/4 cup reserved chickpea liquid through food chute, and process until mostly smooth and creamy, about 1 minute and 30 seconds. (If desired, add more chickpea liquid for looser hummus.) Add salt to taste. Toss together chicken, cumin, paprika, salt, coriander, cinnamon, and pepper in a medium bowl until chicken is well coated. Heat 2 tablespoons oil in a 10-inch high-sided skillet over medium-high. Add chicken in an even layer; cook, undisturbed, until bottom of chicken is lightly browned, about 5 minutes. Stir and cook, stirring occasionally, until chicken is cooked through, about 4 minutes; transfer to a medium bowl. Reduce heat to medium. Add onion and remaining 2 tablespoons oil; cook, stirring occasionally with a wooden spoon to loosen browned bits, until softened and lightly browned, about 15 minutes. Stir in cauliflower, 1/3 cup water, and currants; cover and cook, stirring occasionally to loosen onions from bottom of pan, until cauliflower is tender and onions are caramelized, about 10 minutes. Return chicken to pan, and cook until warmed through. Season with salt to taste. Spread hummus on a large serving platter, making a well in the hummus with the back of a spoon. (Alternately, divide hummus among individual serving plates, and make a well in each.) Spoon the chicken and cauliflower mixture into the well (or individual wells). Garnish with parsley, za’atar, and pine nuts. Drizzle with oil. Serve immediately.",
+    "recipeCategory": [],
+    "recipeCuisine": [],
+    "author": [
+        {
+            "@type": "Person",
+            "name": "Leah Koenig"
+        }
+    ],
+    "aggregateRating": null,
+    "nutrition": null,
+    "review": []
+}
