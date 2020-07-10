@@ -1,6 +1,6 @@
 # Recipe Grabber
 
-![Quickstart](https://github.com/dustinknopoff/nytcooking-grabber/workflows/Quickstart/badge.svg)
+![build-and-check](https://github.com/dustinknopoff/nytcooking-grabber/workflows/build-and-check/badge.svg)
 
 Deployed to [Cloudflare](https://nytcooking-grabber.knopoff.workers.dev)
 
