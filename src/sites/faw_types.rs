@@ -235,7 +235,7 @@ mod tests {
     #[test]
     fn hummus() {
         let src = include_str!("../../tests/hummus.json");
-        let as_recipe: FoodAndWineRecipe = serde_json::from_str(&src).unwrap();
+        let as_recipe: FoodAndWineRecipe<'_> = serde_json::from_str(&src).unwrap();
         let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
         let expected = include_str!("../../tests/hummus.md");
         assert_eq!(builder.build(), expected);
@@ -244,7 +244,7 @@ mod tests {
     #[test]
     fn full_hummus() {
         let src = include_str!("../../tests/full_hummus.json");
-        let as_recipe: FoodAndWineLd = serde_json::from_str(&src).unwrap();
+        let as_recipe: FoodAndWineLd<'_> = serde_json::from_str(&src).unwrap();
         let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
         let expected = include_str!("../../tests/hummus.md");
         assert_eq!(builder.build(), expected);

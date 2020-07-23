@@ -1,11 +1,27 @@
+#![warn(missing_debug_implementations, missing_docs, rust_2018_idioms)]
+#![warn(clippy::all)]
+//! # Recipe Grabber
+//!
+//! ![build-and-check](https://github.com/dustinknopoff/nytcooking-grabber/workflows/build-and-check/badge.svg)
+//!
+//! Deployed to [Cloudflare](https://nytcooking-grabber.knopoff.workers.dev)
+//!
+//! Pass `/?url=<url>` to produce a markdown representation
+//!
+//! ## Currently supported sites:
+//!
+//! - [NYTimes Cooking](https://cooking.nytimes.com)
+//! - [Food and Wine](https://foodandwine.com)
+//!
+
 mod ld_md;
 mod sites;
 mod utils;
+use crate::sites::Sites;
 use cfg_if::cfg_if;
 use ld_md::RecipeMarkdownBuilder;
 use scraper::{Html, Selector};
 use wasm_bindgen::prelude::*;
-use crate::sites::Sites;
 
 cfg_if! {
     // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -18,13 +34,15 @@ cfg_if! {
 }
 
 #[wasm_bindgen]
+/// Given the contents of a website, The `application/ld+json` attribute is extracted,
+/// parsed, and converted in to a markdown document.
 pub fn get_ld_json(contents: &str) -> String {
     let document = Html::parse_document(contents);
     let selector = Selector::parse(r#"script[type="application/ld+json"]"#).unwrap();
     let ctx = document.select(&selector).next().unwrap();
     let text = ctx.text().collect::<Vec<_>>();
     let as_txt = text.join("");
-    let as_recipe: Sites = serde_json::from_str(&as_txt).unwrap();
+    let as_recipe: Sites<'_> = serde_json::from_str(&as_txt).unwrap();
     let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
     builder.build().into()
 }

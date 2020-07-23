@@ -193,7 +193,7 @@ mod tests {
     #[test]
     fn ragu() {
         let src = include_str!("../../tests/ragu.json");
-        let as_recipe: NYTCRecipe = serde_json::from_str(&src).unwrap();
+        let as_recipe: NYTCRecipe<'_> = serde_json::from_str(&src).unwrap();
         let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
         let expected = include_str!("../../tests/ragu.md");
         assert_eq!(builder.build(), expected);
