@@ -19,12 +19,6 @@ pub trait LdJson: Sized {
     /// A recipe yield
     fn recipe_yield(&self) -> Option<Cow<'_, str>>;
 
-    /// A recipe cuisine
-    fn cuisine(&self) -> Option<Cow<'_, str>>;
-
-    /// A recipe category(s)
-    fn category(&self) -> Option<Cow<'_, str>>;
-
     /// A recipe ingredients
     fn ingredients(&self) -> Vec<Cow<'_, str>>;
 
@@ -82,20 +76,6 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         self
     }
 
-    fn add_categories(&mut self) -> &mut Self {
-        if let Some(val) = self.recipe.category() {
-            self.markdown.to_mut().push_str(&format!("{}\n\n", val));
-        }
-        self
-    }
-
-    fn add_cuisine(&mut self) -> &mut Self {
-        if let Some(val) = self.recipe.cuisine() {
-            self.markdown.to_mut().push_str(&format!("{}\n\n", val));
-        }
-        self
-    }
-
     fn add_yield(&mut self) -> &mut Self {
         if let (Some(r_yield), Some(r_total_time)) =
             (self.recipe.recipe_yield(), self.recipe.total_time())
@@ -140,8 +120,6 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
             .add_image()
             .add_description()
             .add_yield()
-            .add_cuisine()
-            .add_categories()
             .add_ingredients()
             .add_instructions()
             .add_source_fragment();

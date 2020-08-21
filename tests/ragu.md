@@ -8,10 +8,6 @@ This hearty ragù has all the punchy, briny flavors of traditional puttanesca (t
 
 Yields: 6 to 8 servings in 2h 
 
-#italian
-
-#dinner #weekday #meat #pastas #main_course
-
 ## Ingredients
 - 3 to 3 1/2 pounds boneless, skinless pork shoulder
 - Kosher salt
