@@ -10,4 +10,4 @@ Pass `/?url=<url>` to produce a markdown representation
 
 - [NYTimes Cooking](https://cooking.nytimes.com)
 - [Food and Wine](https://foodandwine.com)
-
+- In theory works with any site which follows the JSON Schema spec of Recipes.
