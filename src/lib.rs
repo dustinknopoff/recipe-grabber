@@ -42,7 +42,14 @@ pub fn get_ld_json(contents: &str) -> String {
     let text = ctx.text().collect::<Vec<_>>();
     let as_txt = text.join("");
     let as_txt = traverse_for_type_recipe(&as_txt);
-    let as_recipe: LdRecipe<'_> = serde_json::from_str(&as_txt).unwrap();
+    let as_recipe: LdRecipe<'_> = match serde_json::from_str(&as_txt) {
+        Ok(val) => val,
+        Err(_) => {
+            return String::from(
+                "Whoops! Something went wrong. This worker does not support that url :(.",
+            )
+        }
+    };
     let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
     builder.build().into()
 }
