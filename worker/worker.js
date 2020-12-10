@@ -16,7 +16,10 @@ async function handleRequest(request) {
 
     const recipe_context = `${get_ld_json(data)}(${url})`;
 
-    let res = new Response(recipe_context, { status: 200 });
+    let res = new Response(recipe_context, {
+      status: 200,
+      headers: { "Content-Type": "text/markdown" },
+    });
     return res;
   }
   return new Response(
