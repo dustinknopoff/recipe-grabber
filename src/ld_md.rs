@@ -92,7 +92,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         for item in self.recipe.ingredients().iter() {
             out.push_str(&format!("- {}\n", item))
         }
-        out.push_str("\n");
+        out.push('\n');
         self.markdown.to_mut().push_str(&out);
         self
     }
@@ -102,7 +102,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         for (idx, item) in self.recipe.instructions().iter().enumerate() {
             out.push_str(&format!("{}. {}\n", idx + 1, item))
         }
-        out.push_str("\n");
+        out.push('\n');
         self.markdown.to_mut().push_str(&out);
         self
     }

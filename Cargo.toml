@@ -1,8 +1,12 @@
 [package]
-authors = ["Dustin Knopoff <dustinknopoff@gmail.com>"]
+authors = ["Dustin Knopoff <rust@knopoff.dev>"]
 edition = "2018"
-include = ["src/**", "README.md"]
+homepage = "https://github.com/dustinknopoff/nytcooking-grabber"
+include = ["src/**", "README.md", "LICENSE_MIT", "LICENSE_APACHE"]
+license = "MIT or Apache 2.0"
 name = "nytcooking-grabber"
+readme = "README.md"
+repository = "https://github.com/dustinknopoff/nytcooking-grabber"
 version = "0.1.0"
 
 [lib]
@@ -12,7 +16,7 @@ crate-type = ["cdylib", "rlib"]
 default = ["console_error_panic_hook"]
 
 [dependencies]
-cfg-if = "0.1"
+cfg-if = "1.0"
 wasm-bindgen = "0.2"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
