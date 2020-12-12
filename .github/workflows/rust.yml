@@ -87,3 +87,8 @@ jobs:
 
       - name: Run wasm-pack build
         run: wasm-pack build --target web
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@1.2.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
