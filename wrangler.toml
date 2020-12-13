@@ -1,5 +1,5 @@
 account_id = ""
-name = "nytcooking-grabber"
+name = "recipe-grabber"
 route = ""
 type = "rust"
 workers_dev = true
