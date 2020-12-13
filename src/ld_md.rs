@@ -72,7 +72,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
     fn add_description(&mut self) -> &mut Self {
         self.markdown
             .to_mut()
-            .push_str(&format!("{}\n\n", self.recipe.description()));
+            .push_str(&format!("{}\n\n", self.recipe.description().trim()));
         self
     }
 
@@ -90,7 +90,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
     fn add_ingredients(&mut self) -> &mut Self {
         let mut out = String::from("## Ingredients\n");
         for item in self.recipe.ingredients().iter() {
-            out.push_str(&format!("- {}\n", item))
+            out.push_str(&format!("- {}\n", item.trim()))
         }
         out.push('\n');
         self.markdown.to_mut().push_str(&out);
@@ -100,7 +100,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
     fn add_instructions(&mut self) -> &mut Self {
         let mut out = String::from("## Instructions\n");
         for (idx, item) in self.recipe.instructions().iter().enumerate() {
-            out.push_str(&format!("{}. {}\n", idx + 1, item))
+            out.push_str(&format!("{}. {}\n", idx + 1, item.trim()))
         }
         out.push('\n');
         self.markdown.to_mut().push_str(&out);

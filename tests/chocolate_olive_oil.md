@@ -32,7 +32,7 @@ Yields: 9 in 50m
 6. Use a rubber spatula and add two scoops of the whipped egg whites to the chocolate. Mix until it&#8217;s fully combined. This helps thin out the batter to make it easier to fold in the rest of the egg whites.
 7. Dump in the rest of the egg whites and gently fold to combine. You might think the batter is too separated and won&#8217;t come together, but just keep folding! By the end you should be left with a brownie batter consistency.
 8. Pour the batter into the pan and spread it even. Bake for 20-25 minutes or until it&#8217;s evenly puffed up.
-9. Allow the cake to cool for about 10 minutes. The cake will being to flatten out as it cools to create a deliciously rich and fudgy texture.\u{a0}
+9. Allow the cake to cool for about 10 minutes. The cake will being to flatten out as it cools to create a deliciously rich and fudgy texture.
 10. Release the cake from the pan and top with a dusting of powdered sugar or ice cream&#8230;or both! It&#8217;s best served warm no need to wait for it to cool completely. Enjoy!
 
 Source: [Flourless Olive Oil Chocolate Cake]

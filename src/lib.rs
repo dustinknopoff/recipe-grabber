@@ -20,6 +20,7 @@ mod utils;
 use cfg_if::cfg_if;
 use ld_md::RecipeMarkdownBuilder;
 use scraper::{Html, Selector};
+use serde_json::Value;
 use sites::LdRecipe;
 use wasm_bindgen::prelude::*;
 
@@ -32,24 +33,43 @@ cfg_if! {
     }
 }
 
+macro_rules! res_unwrap {
+    ($val: expr) => {
+        match $val {
+            Ok(val) => val,
+            Err(_) => {
+                return String::from(
+                    "Whoops! Something went wrong. This worker does not support that url :(.",
+                )
+            }
+        }
+    };
+}
+
+macro_rules! opt_unwrap {
+    ($val: expr) => {
+        match $val {
+            Some(val) => val,
+            None => {
+                return String::from(
+                    "Whoops! Something went wrong. This worker does not support that url :(.",
+                )
+            }
+        }
+    };
+}
+
 #[wasm_bindgen]
 /// Given the contents of a website, The `application/ld+json` attribute is extracted,
 /// parsed, and converted in to a markdown document.
 pub fn get_ld_json(contents: &str) -> String {
     let document = Html::parse_document(contents);
-    let selector = Selector::parse(r#"script[type="application/ld+json"]"#).unwrap();
-    let ctx = document.select(&selector).next().unwrap();
+    let selector = res_unwrap! { Selector::parse(r#"script[type="application/ld+json"]"#) };
+    let ctx = opt_unwrap! { document.select(&selector).next() };
     let text = ctx.text().collect::<Vec<_>>();
     let as_txt = text.join("");
     let as_txt = traverse_for_type_recipe(&as_txt);
-    let as_recipe: LdRecipe<'_> = match serde_json::from_str(&as_txt) {
-        Ok(val) => val,
-        Err(_) => {
-            return String::from(
-                "Whoops! Something went wrong. This worker does not support that url :(.",
-            )
-        }
-    };
+    let as_recipe: LdRecipe<'_> = res_unwrap! { serde_json::from_str(&as_txt) };
     let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
     builder.build().into()
 }
@@ -63,33 +83,28 @@ fn traverse_for_type_recipe(content: &str) -> String {
         return content.to_string();
     }
     // Example: tests/chocolate_olive_oil.json
-    if let Some(val) = tree.get("@graph") {
-        val.as_array()
-            .unwrap()
-            .iter()
-            .filter(|graph_item| graph_item.get("@type") == Some(&_recipe_str))
-            .collect::<Vec<_>>()
-            .first()
-            .unwrap()
-            .to_string()
-    }
-    // Example: tests/full_hummus.json
-    else if tree.is_array() {
-        tree.as_array()
-            .unwrap()
-            .iter()
-            .filter(|graph_item| graph_item.get("@type") == Some(&_recipe_str))
-            .collect::<Vec<_>>()
-            .first()
-            .unwrap()
-            .to_string()
+    let val: &Value = if let Some(val) = tree.get("@graph") {
+        val
+    } else if tree.is_array() {
+        &tree
     } else {
         panic!("Invalid recipe!")
-    }
+    };
+    val.as_array()
+        .unwrap()
+        .iter()
+        .filter(|graph_item| graph_item.get("@type") == Some(&_recipe_str))
+        .collect::<Vec<_>>()
+        .first()
+        .unwrap()
+        .to_string()
 }
 
 #[cfg(test)]
 mod tests {
+
+    use std::fs::File;
+    use std::io::Write;
 
     use crate::get_ld_json;
 
@@ -111,6 +126,9 @@ mod tests {
     fn chocolate_olive_oil() {
         let src = include_str!("../tests/chocolate_olive_oil.html");
         let expected = include_str!("../tests/chocolate_olive_oil.md");
+        let actual = get_ld_json(src);
+        let mut file = File::create("olive oil.md").unwrap();
+        file.write_all(&actual.as_bytes()).unwrap();
         assert_eq!(get_ld_json(src), expected);
     }
 }
