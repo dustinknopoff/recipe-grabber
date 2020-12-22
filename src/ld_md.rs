@@ -1,5 +1,7 @@
 use std::borrow::Cow;
 
+use crate::sites::RecipeInstructionKinds;
+
 pub trait LdJson: Sized {
     /// A recipe title
     fn name(&self) -> Cow<'_, str>;
@@ -23,7 +25,7 @@ pub trait LdJson: Sized {
     fn ingredients(&self) -> Vec<Cow<'_, str>>;
 
     /// A recipe ingredients
-    fn instructions(&self) -> Vec<Cow<'_, str>>;
+    fn instructions(&self) -> RecipeInstructionKinds<'_>;
 
     /// A recipe video
     fn video(&self) -> Option<Cow<'_, str>>;
@@ -98,9 +100,30 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
     }
 
     fn add_instructions(&mut self) -> &mut Self {
-        let mut out = String::from("## Instructions\n");
-        for (idx, item) in self.recipe.instructions().iter().enumerate() {
-            out.push_str(&format!("{}. {}\n", idx + 1, item.trim()))
+        let mut out = String::from("## Instructions\n\n");
+        if let RecipeInstructionKinds::Sectioned(val) = self.recipe.instructions() {
+            val.into_iter().for_each(|section| {
+                out.push_str(&format!("### {}\n\n", section.name));
+                for (idx, item) in section.instructions.iter().enumerate() {
+                    out.push_str(&format!("{}. {}\n", idx + 1, item.text.trim()))
+                }
+            })
+        } else {
+            let val = self.recipe.instructions();
+            let val: Vec<_> = match val {
+                RecipeInstructionKinds::String(ref val) => {
+                    val.split(". ").map(|v| v.trim()).map(Cow::from).collect()
+                }
+                RecipeInstructionKinds::Instruction(val) => {
+                    val.into_iter().map(|x| x.simplify()).collect::<Vec<_>>()
+                }
+                RecipeInstructionKinds::Sectioned(_) => {
+                    unreachable!()
+                }
+            };
+            for (idx, item) in val.iter().enumerate() {
+                out.push_str(&format!("{}. {}\n", idx + 1, item.trim()))
+            }
         }
         out.push('\n');
         self.markdown.to_mut().push_str(&out);

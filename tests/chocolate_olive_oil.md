@@ -7,7 +7,7 @@ By: Jenna Barnard
 <p>This flourless chocolate cake is baked with olive oil to create a rich and savory flavor. Top with ice cream, powdered sugar, or anything sweet to balance out the deep chocolate cake.</p>
 <p>&nbsp;</p>
 
-Yields: 9 in 50m
+Yields: 9 in 50 minutes
 
 ## Ingredients
 - 8 oz bittersweet chocolate, chopped*
@@ -24,6 +24,7 @@ Yields: 9 in 50m
 - Chocolate ganache
 
 ## Instructions
+
 1. Preheat the oven to 350F and coat a 9&#8243; springform pan in nonstick spray. Place a sheet of parchment paper to cover the bottom plate and insert the ring to lock it in place.
 2. In a heat safe bowl, add the chopped chocolate and oil. Place over a pot of simmering water, ensuring the bowl doesn&#8217;t touch the water. Stir until melted, then remove from the pot.
 3. Mix in the espresso powder and vanilla, then allow the chocolate to cool while yo whip the egg whites.

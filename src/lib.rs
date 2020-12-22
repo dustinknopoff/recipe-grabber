@@ -14,9 +14,10 @@
 //! - [Food and Wine](https://foodandwine.com)
 //!
 
-mod ld_md;
-mod sites;
-mod utils;
+pub(crate) mod duration;
+pub(crate) mod ld_md;
+pub(crate) mod sites;
+pub(crate) mod utils;
 use cfg_if::cfg_if;
 use ld_md::RecipeMarkdownBuilder;
 use scraper::{Html, Selector};
@@ -37,10 +38,11 @@ macro_rules! res_unwrap {
     ($val: expr) => {
         match $val {
             Ok(val) => val,
-            Err(_) => {
+            Err(e) => {
+                dbg!(e);
                 return String::from(
                     "Whoops! Something went wrong. This worker does not support that url :(.",
-                )
+                );
             }
         }
     };
@@ -102,10 +104,6 @@ fn traverse_for_type_recipe(content: &str) -> String {
 
 #[cfg(test)]
 mod tests {
-
-    use std::fs::File;
-    use std::io::Write;
-
     use crate::get_ld_json;
 
     #[test]
@@ -126,9 +124,13 @@ mod tests {
     fn chocolate_olive_oil() {
         let src = include_str!("../tests/chocolate_olive_oil.html");
         let expected = include_str!("../tests/chocolate_olive_oil.md");
-        let actual = get_ld_json(src);
-        let mut file = File::create("olive oil.md").unwrap();
-        file.write_all(&actual.as_bytes()).unwrap();
+        assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn meringue() {
+        let src = include_str!("../tests/chocolate-hazelnut-meringue.html");
+        let expected = include_str!("../tests/meringue.md");
         assert_eq!(get_ld_json(src), expected);
     }
 }

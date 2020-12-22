@@ -12,7 +12,7 @@ Serving hummus at the center of the table is common practice in the Middle East,
 
 Just like snack-time hummus, dinner hummus tastes best with pita (though if a gluten-free friend is joining the dinner table, I also make sure to have a sturdy gluten-free cracker on hand so they can dip with abandon). Start with pita that is either super fresh and plush or cut into wedges, drizzled with a little olive oil, and lightly toasted until crisp and golden. With a few pita rounds between us, my husband and I can swipe our way through an embarrassing amount of this hummus. With a glass of wine in hand and, if I’m feeling up to the task, a green salad on the table, dinner is served.
 
-Yields: 6 in 60m
+Yields: 6 in 60 minutes
 
 ## Ingredients
 - 2 (15.5-ounce) cans chickpeas, drained, 1/2 cup chickpea liquid reserved, divided
@@ -36,6 +36,7 @@ Yields: 6 in 60m
 - Chopped fresh flat-leaf parsley, za’atar, and toasted pine nuts, for serving
 
 ## Instructions
+
 1. Process chickpeas, tahini, oil, lemon juice, salt, and garlic in a food processor until a coarse paste forms, about 20 seconds, stopping to scrape down sides as needed
 2. With processor running, slowly pour 1/4 cup reserved chickpea liquid through food chute, and process until mostly smooth and creamy, about 1 minute and 30 seconds
 3. (If desired, add more chickpea liquid for looser hummus.) Add salt to taste
