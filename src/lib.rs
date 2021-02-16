@@ -48,18 +48,18 @@ macro_rules! res_unwrap {
     };
 }
 
-macro_rules! opt_unwrap {
-    ($val: expr) => {
-        match $val {
-            Some(val) => val,
-            None => {
-                return String::from(
-                    "Whoops! Something went wrong. This worker does not support that url :(.",
-                )
-            }
-        }
-    };
-}
+// macro_rules! opt_unwrap {
+//     ($val: expr) => {
+//         match $val {
+//             Some(val) => val,
+//             None => {
+//                 return String::from(
+//                     "Whoops! Something went wrong. This worker does not support that url :(.",
+//                 )
+//             }
+//         }
+//     };
+// }
 
 #[wasm_bindgen]
 /// Given the contents of a website, The `application/ld+json` attribute is extracted,
@@ -67,39 +67,48 @@ macro_rules! opt_unwrap {
 pub fn get_ld_json(contents: &str) -> String {
     let document = Html::parse_document(contents);
     let selector = res_unwrap! { Selector::parse(r#"script[type="application/ld+json"]"#) };
-    let ctx = opt_unwrap! { document.select(&selector).next() };
-    let text = ctx.text().collect::<Vec<_>>();
-    let as_txt = text.join("");
-    let as_txt = traverse_for_type_recipe(&as_txt);
+    let ctx: Vec<String> = document
+        .select(&selector)
+        .map(|ctx| {
+            let text = ctx.text().collect::<Vec<_>>();
+            text.join("")
+        })
+        .collect();
+    let as_txt = traverse_for_type_recipe(&ctx);
     let as_recipe: LdRecipe<'_> = res_unwrap! { serde_json::from_str(&as_txt) };
     let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
     builder.build().into()
 }
 
-fn traverse_for_type_recipe(content: &str) -> String {
-    let tree: serde_json::Value = serde_json::from_str(content).unwrap();
-    // let test_pattern = String::from("Recipe");
+fn traverse_for_type_recipe(ld_jsons: &[String]) -> String {
     let _recipe_str = serde_json::json!("Recipe");
     // Example: tests/ragu.json
-    if let Some(_recipe_str) = tree.get("@type") {
-        return content.to_string();
+    for content in ld_jsons {
+        let tree: serde_json::Value = serde_json::from_str(content).unwrap();
+        if let Some(val) = tree.get("@type") {
+            if val == &_recipe_str {
+                return content.to_string();
+            }
+        }
+        // Example: tests/chocolate_olive_oil.json
+        let val: &Value = if let Some(val) = tree.get("@graph") {
+            val
+        } else if tree.is_array() {
+            &tree
+        } else {
+            continue;
+        };
+        return val
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|graph_item| graph_item.get("@type") == Some(&_recipe_str))
+            .collect::<Vec<_>>()
+            .first()
+            .unwrap()
+            .to_string();
     }
-    // Example: tests/chocolate_olive_oil.json
-    let val: &Value = if let Some(val) = tree.get("@graph") {
-        val
-    } else if tree.is_array() {
-        &tree
-    } else {
-        panic!("Invalid recipe!")
-    };
-    val.as_array()
-        .unwrap()
-        .iter()
-        .filter(|graph_item| graph_item.get("@type") == Some(&_recipe_str))
-        .collect::<Vec<_>>()
-        .first()
-        .unwrap()
-        .to_string()
+    panic!("Invalid recipe!")
 }
 
 #[cfg(test)]
@@ -131,6 +140,13 @@ mod tests {
     fn meringue() {
         let src = include_str!("../tests/chocolate-hazelnut-meringue.html");
         let expected = include_str!("../tests/meringue.md");
+        assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn eggplant() {
+        let src = include_str!("../tests/eggplant-pizza.html");
+        let expected = include_str!("../tests/eggplant-pizza.md");
         assert_eq!(get_ld_json(src), expected);
     }
 }

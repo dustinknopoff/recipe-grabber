@@ -21,13 +21,34 @@ impl<T: Clone> SingleOrArray<T> {
     }
 }
 
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+#[serde(untagged)]
+pub enum TypesOrArray<'t> {
+    String(Cow<'t, str>),
+    Number(usize),
+    Array(Vec<Cow<'t, str>>),
+}
+
+impl<'t> TypesOrArray<'t> {
+    fn get(&self) -> Cow<'t, str> {
+        match self {
+            TypesOrArray::String(val) => val.clone(),
+            TypesOrArray::Number(val) => Cow::from(val.to_string()),
+            TypesOrArray::Array(val) => val.first().unwrap().to_owned(),
+        }
+    }
+}
+
 pub mod media {
+    use std::cmp::Ordering;
+
     use super::*;
     #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
     #[serde(untagged)]
     pub enum Image<'r> {
         String(Cow<'r, str>),
         Array(Vec<Cow<'r, str>>),
+        ArrayImage(Vec<ImageObject<'r>>),
         Url(ImageObject<'r>),
     }
 
@@ -37,14 +58,43 @@ pub mod media {
                 Image::String(val) => val.to_owned(),
                 Image::Array(val) => val.first().unwrap().to_owned(),
                 Image::Url(val) => val.url.to_owned(),
+                Image::ArrayImage(val) => {
+                    let mut val = val.clone();
+                    val.sort();
+                    val.last().unwrap().url.to_owned()
+                }
             }
         }
     }
 
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, Eq, PartialEq, Clone)]
     pub struct ImageObject<'i> {
         #[serde(rename = "url")]
         pub(crate) url: Cow<'i, str>,
+        pub(crate) width: Option<usize>,
+        pub(crate) height: Option<usize>,
+    }
+
+    impl<'i> PartialOrd for ImageObject<'i> {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            Some(match (self.width, other.width) {
+                (None, None) => Ordering::Equal,
+                (Some(width), Some(o_width)) => width.cmp(&o_width),
+                (Some(_), None) => Ordering::Greater,
+                (None, Some(_)) => Ordering::Less,
+            })
+        }
+    }
+
+    impl<'i> Ord for ImageObject<'i> {
+        fn cmp(&self, other: &Self) -> Ordering {
+            match (self.width, other.width) {
+                (None, None) => Ordering::Equal,
+                (Some(width), Some(o_width)) => width.cmp(&o_width),
+                (Some(_), None) => Ordering::Greater,
+                (None, Some(_)) => Ordering::Less,
+            }
+        }
     }
 
     #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
@@ -65,14 +115,14 @@ pub struct LdRecipe<'r> {
     #[serde(borrow)]
     pub(crate) name: Cow<'r, str>,
     #[serde(borrow)]
-    pub(crate) description: Cow<'r, str>,
+    pub(crate) description: Option<Cow<'r, str>>,
     pub(crate) author: SingleOrArray<Author<'r>>,
     #[serde(borrow)]
     pub(crate) image: Image<'r>,
     #[serde(borrow)]
     pub(crate) total_time: Option<Cow<'r, str>>,
     #[serde(borrow)]
-    pub(crate) recipe_yield: SingleOrArray<Cow<'r, str>>,
+    pub(crate) recipe_yield: TypesOrArray<'r>,
     #[serde(borrow)]
     pub(crate) recipe_ingredient: Vec<Cow<'r, str>>,
     pub(crate) recipe_instructions: RecipeInstructionKinds<'r>,
@@ -94,7 +144,11 @@ impl<'r> LdJson for LdRecipe<'r> {
         self.name.to_owned()
     }
     fn description(&self) -> std::borrow::Cow<'_, str> {
-        self.description.to_owned()
+        if let Some(desc) = &self.description {
+            desc.to_owned()
+        } else {
+            Cow::from("")
+        }
     }
     fn author(&self) -> std::borrow::Cow<'_, str> {
         self.author.get().name
@@ -170,6 +224,8 @@ pub mod sub_objects {
     pub enum RecipeInstructionKinds<'r> {
         #[serde(borrow)]
         String(Cow<'r, str>),
+        #[serde(borrow)]
+        StringInstruction(Vec<Cow<'r, str>>),
         #[serde(borrow)]
         Instruction(Vec<RecipeInstruction<'r>>),
         #[serde(borrow)]
