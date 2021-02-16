@@ -25,7 +25,7 @@ pub trait LdJson: Sized {
     fn ingredients(&self) -> Vec<Cow<'_, str>>;
 
     /// A recipe ingredients
-    fn instructions(&self) -> RecipeInstructionKinds<'_>;
+    fn instructions(&self) -> Vec<Cow<'_, str>>;
 
     /// A recipe video
     fn video(&self) -> Option<Cow<'_, str>>;

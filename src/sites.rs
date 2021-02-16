@@ -1,5 +1,6 @@
 use crate::duration::Duration;
 use crate::ld_md::LdJson;
+use derive_builder::Builder;
 pub use media::*;
 use serde::{Deserialize, Serialize};
 pub use sub_objects::*;
@@ -109,24 +110,24 @@ pub mod media {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Clone, Builder)]
 #[serde(rename_all = "camelCase")]
 pub struct LdRecipe<'r> {
     #[serde(borrow)]
     pub(crate) name: Cow<'r, str>,
     #[serde(borrow)]
     pub(crate) description: Option<Cow<'r, str>>,
-    pub(crate) author: SingleOrArray<Author<'r>>,
+    pub(crate) author: Cow<'r, str>,
     #[serde(borrow)]
-    pub(crate) image: Image<'r>,
+    pub(crate) image: Cow<'r, str>,
     #[serde(borrow)]
     pub(crate) total_time: Option<Cow<'r, str>>,
     #[serde(borrow)]
-    pub(crate) recipe_yield: TypesOrArray<'r>,
+    pub(crate) recipe_yield: Cow<'r, str>,
     #[serde(borrow)]
     pub(crate) recipe_ingredient: Vec<Cow<'r, str>>,
-    pub(crate) recipe_instructions: RecipeInstructionKinds<'r>,
-    pub(crate) video: Option<Video<'r>>,
+    pub(crate) recipe_instructions: Vec<Cow<'r, str>>,
+    pub(crate) video: Option<Cow<'r, str>>,
 }
 
 impl<'r> LdRecipe<'r> {
@@ -151,10 +152,10 @@ impl<'r> LdJson for LdRecipe<'r> {
         }
     }
     fn author(&self) -> std::borrow::Cow<'_, str> {
-        self.author.get().name
+        self.author
     }
     fn image(&self) -> std::borrow::Cow<'_, str> {
-        self.image.get()
+        self.image
     }
     fn total_time(&self) -> Option<std::borrow::Cow<'_, str>> {
         self.clean_total_time()
@@ -162,8 +163,6 @@ impl<'r> LdJson for LdRecipe<'r> {
     fn recipe_yield(&self) -> Option<std::borrow::Cow<'_, str>> {
         Some(Cow::Owned(
             self.recipe_yield
-                .get()
-                .to_owned()
                 .replace("Serves : ", "")
                 .trim()
                 .to_string(),
@@ -178,16 +177,12 @@ impl<'r> LdJson for LdRecipe<'r> {
             .collect()
     }
 
-    fn instructions(&self) -> RecipeInstructionKinds<'_> {
-        self.recipe_instructions.get()
+    fn instructions(&self) -> Vec<std::borrow::Cow<'_, str>> {
+        self.recipe_instructions
     }
 
     fn video(&self) -> Option<std::borrow::Cow<'_, str>> {
-        if let Some(vid) = &self.video {
-            Some(vid.thumbnail_url.to_owned())
-        } else {
-            None
-        }
+        self.video
     }
 }
 
