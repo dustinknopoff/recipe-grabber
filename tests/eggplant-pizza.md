@@ -4,7 +4,7 @@ By: Anne Aobadia
 
 ![](https://www.dietdoctor.com/wp-content/uploads/2016/01/DD-21.jpg)
 
-If you love pizza — and who doesn’t? — you’re going to love this dish! Earthy eggplant makes the perfect crust for this <a href=\"https://www.dietdoctor.com/low-carb\">low-carb</a> pizza. And all that gooey melted cheese makes it all even more delicious and fun to eat.
+If you love pizza — and who doesn’t? — you’re going to love this dish! Earthy eggplant makes the perfect crust for this <a href="https://www.dietdoctor.com/low-carb">low-carb</a> pizza. And all that gooey melted cheese makes it all even more delicious and fun to eat.
 
 Yields: 4 in 1 hours and 20 minutes
 

@@ -77,7 +77,8 @@ pub fn get_ld_json(contents: &str) -> String {
     let as_txt = traverse_for_type_recipe(&ctx);
     let as_recipe: LdRecipe<'_> = res_unwrap! { serde_json::from_str(&as_txt) };
     let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
-    builder.build().into()
+    let markdown: String = builder.build().into();
+    markdown.replace("\r\n", "\n")
 }
 
 fn traverse_for_type_recipe(ld_jsons: &[String]) -> String {
@@ -115,38 +116,62 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> String {
 mod tests {
     use crate::get_ld_json;
 
+    #[macro_export]
+    macro_rules! str_assert_eq {
+        ($left:expr, $right:expr $(,)?) => {{
+            match (&$left, &$right) {
+                (left_val, right_val) => {
+                    if !(*left_val == *right_val) {
+                        panic!("{:#?}", dissimilar::diff(&*left_val, &*right_val))
+                    }
+                }
+            }
+        }};
+        ($left:expr, $right:expr, $($arg:tt)+) => {{
+            match (&($left), &($right)) {
+                (left_val, right_val) => {
+                    if !(*left_val == *right_val) {
+                        panic!("{:#?}", dissimilar::diff(&*left_val, &*right_val))
+                    }
+                }
+            }
+        }};
+    }
+
     #[test]
     fn hummus() {
         let src = include_str!("../tests/hummus.html");
         let expected = include_str!("../tests/hummus.md");
-        assert_eq!(get_ld_json(src), expected);
+        str_assert_eq!(get_ld_json(src), expected);
     }
 
     #[test]
     fn ragu() {
         let src = include_str!("../tests/ragu.html");
         let expected = include_str!("../tests/ragu.md");
-        assert_eq!(get_ld_json(src), expected);
+        str_assert_eq!(get_ld_json(src), expected);
     }
 
     #[test]
     fn chocolate_olive_oil() {
         let src = include_str!("../tests/chocolate_olive_oil.html");
         let expected = include_str!("../tests/chocolate_olive_oil.md");
-        assert_eq!(get_ld_json(src), expected);
+        let actual = get_ld_json(src);
+        str_assert_eq!(actual, expected);
     }
 
     #[test]
     fn meringue() {
         let src = include_str!("../tests/chocolate-hazelnut-meringue.html");
         let expected = include_str!("../tests/meringue.md");
-        assert_eq!(get_ld_json(src), expected);
+        let actual = get_ld_json(src);
+        str_assert_eq!(actual, expected);
     }
 
     #[test]
     fn eggplant() {
         let src = include_str!("../tests/eggplant-pizza.html");
         let expected = include_str!("../tests/eggplant-pizza.md");
-        assert_eq!(get_ld_json(src), expected);
+        str_assert_eq!(get_ld_json(src), expected);
     }
 }
