@@ -117,6 +117,9 @@ mod tests {
     use crate::get_ld_json;
 
     #[macro_export]
+    /// Same semantics as [`assert_eq`] with one major distinction.
+    /// This only works on `AsRef<str>` and uses the [dissimilar](https://crates.io/dissimilar)
+    /// lib to produce the output as chunks of Equal, Insert, Delete
     macro_rules! str_assert_eq {
         ($left:expr, $right:expr $(,)?) => {{
             match (&$left, &$right) {
