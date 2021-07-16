@@ -50,6 +50,13 @@ pub mod media {
         Array(Vec<Cow<'r, str>>),
         ArrayImage(Vec<ImageObject<'r>>),
         Url(ImageObject<'r>),
+        Id(IdImage<'r>),
+    }
+
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    pub struct IdImage<'r> {
+        #[serde(rename = "@id")]
+        id: Cow<'r, str>,
     }
 
     impl<'r> Image<'r> {
@@ -58,6 +65,7 @@ pub mod media {
                 Image::String(val) => val.to_owned(),
                 Image::Array(val) => val.first().unwrap().to_owned(),
                 Image::Url(val) => val.url.to_owned(),
+                Image::Id(val) => val.id.to_owned(),
                 Image::ArrayImage(val) => {
                     let mut val = val.clone();
                     val.sort();

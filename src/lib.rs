@@ -177,4 +177,11 @@ mod tests {
         let expected = include_str!("../tests/eggplant-pizza.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
+
+    #[test]
+    fn tenders() {
+        let src = include_str!("../tests/bacon-wrapped-chicken-tenders.html");
+        let expected = include_str!("../tests/tenders.md");
+        str_assert_eq!(get_ld_json(src), expected);
+    }
 }
