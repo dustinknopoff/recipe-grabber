@@ -16,7 +16,7 @@ async function handleRequest(request) {
 
     const recipe_context = `${get_ld_json(data)}(${url})`;
 
-    if (recipe_context.includes("Whoops! Something went wrong. This worker does not support that url :(.")) {
+    if (recipe_context.includes("Whoops! Something went wrong")) {
       return new Response(recipe_context, {
         status: 501,
       })
