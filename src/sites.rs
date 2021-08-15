@@ -124,7 +124,7 @@ pub struct LdRecipe<'r> {
     pub(crate) name: Cow<'r, str>,
     #[serde(borrow)]
     pub(crate) description: Option<Cow<'r, str>>,
-    pub(crate) author: SingleOrArray<Author<'r>>,
+    pub(crate) author: Author<'r>,
     #[serde(borrow)]
     pub(crate) image: Image<'r>,
     #[serde(borrow)]
@@ -159,7 +159,10 @@ impl<'r> LdJson for LdRecipe<'r> {
         }
     }
     fn author(&self) -> std::borrow::Cow<'_, str> {
-        self.author.get().name
+        match &self.author {
+            Author::String(val) => val.clone(),
+            Author::AuthorObject(author) => author.get().name,
+        }
     }
     fn image(&self) -> std::borrow::Cow<'_, str> {
         self.image.get()
@@ -191,20 +194,24 @@ impl<'r> LdJson for LdRecipe<'r> {
     }
 
     fn video(&self) -> Option<std::borrow::Cow<'_, str>> {
-        if let Some(vid) = &self.video {
-            Some(vid.thumbnail_url.to_owned())
-        } else {
-            None
-        }
+        self.video.as_ref().map(|vid| vid.thumbnail_url.to_owned())
     }
 }
 
 pub mod sub_objects {
     use super::*;
     #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
-    pub struct Author<'a> {
+    pub struct AuthorObject<'a> {
         #[serde(borrow)]
         pub(crate) name: Cow<'a, str>,
+    }
+
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[serde(untagged)]
+    pub enum Author<'a> {
+        #[serde(borrow)]
+        AuthorObject(SingleOrArray<AuthorObject<'a>>),
+        String(Cow<'a, str>),
     }
 
     #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
