@@ -45,3 +45,8 @@ wasm-bindgen-test = "0.3"
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ["-O2", "--enable-mutable-globals"]
+
+[profile.dev]
+# Disabling debug info speeds up builds a bunch,
+# and we don't rely on it for debugging that much.
+debug = 0
