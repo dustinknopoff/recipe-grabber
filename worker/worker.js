@@ -47,10 +47,7 @@ async function handleRequest(request) {
     });
     return res;
   }
-  return new Response(
-    errorAsHTML("<pre>No url passed to perform conversion to markdown</pre>"),
-    { status: 400, headers: { "Content-Type": "text/html"} }
-  );
+  return Response.redirect("https://recipe-ssg.pages.dev/", 301)
 }
 
 function get(name, url) {
