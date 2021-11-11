@@ -193,7 +193,7 @@ mod tests {
 
     #[test]
     fn eggplant() {
-        let src = include_str!("../tests/eggplant-pizza.Html");
+        let src = include_str!("../tests/eggplant-pizza.html");
         let expected = include_str!("../tests/eggplant-pizza.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
