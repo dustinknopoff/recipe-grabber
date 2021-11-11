@@ -13,8 +13,14 @@ async function handleRequest(request) {
     await wasm_bindgen(wasm);
 
     let data = await fetch(url).then((r) => r.text());
-
-    const recipe_context = `${get_ld_json(data)}(${url})`;
+    let recipe_context;
+    try {
+      recipe_context = `${get_ld_json(data)}(${url})`;
+    } catch (error) {
+      return new Response("Whoops! Something went wrong", {
+        status: 501,
+      })
+    }
 
     if (recipe_context.includes("Whoops! Something went wrong")) {
       return new Response(recipe_context, {

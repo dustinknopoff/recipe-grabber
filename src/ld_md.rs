@@ -117,6 +117,10 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
                 RecipeInstructionKinds::Instruction(val) => {
                     val.into_iter().map(|x| x.simplify()).collect::<Vec<_>>()
                 }
+                RecipeInstructionKinds::NestedInstruction(val) => val
+                    .into_iter()
+                    .flat_map(|x| x.into_iter().map(|y| y.simplify()))
+                    .collect::<Vec<_>>(),
                 RecipeInstructionKinds::StringInstruction(val) => val,
                 RecipeInstructionKinds::Sectioned(_) => {
                     unreachable!()

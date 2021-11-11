@@ -244,6 +244,8 @@ pub mod sub_objects {
         #[serde(borrow)]
         Instruction(Vec<RecipeInstruction<'r>>),
         #[serde(borrow)]
+        NestedInstruction(Vec<Vec<RecipeInstruction<'r>>>),
+        #[serde(borrow)]
         Sectioned(Vec<HowToSection<'r>>),
     }
 

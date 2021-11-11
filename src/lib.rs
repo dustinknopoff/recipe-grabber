@@ -18,6 +18,7 @@ pub(crate) mod duration;
 pub(crate) mod ld_md;
 pub(crate) mod sites;
 pub(crate) mod utils;
+use anyhow::bail;
 use cfg_if::cfg_if;
 use ld_md::RecipeMarkdownBuilder;
 use scraper::{Html, Selector};
@@ -34,39 +35,43 @@ cfg_if! {
     }
 }
 
-macro_rules! res_unwrap {
-    ($val: expr) => {
-        match $val {
-            Ok(val) => val,
-            Err(e) => {
-                dbg!(e);
-                return String::from(
-                    "Whoops! Something went wrong. This worker does not support that url :(.",
-                );
-            }
-        }
-    };
-}
+use thiserror::Error;
 
-// macro_rules! opt_unwrap {
-//     ($val: expr) => {
-//         match $val {
-//             Some(val) => val,
-//             None => {
-//                 return String::from(
-//                     "Whoops! Something went wrong. This worker does not support that url :(.",
-//                 )
-//             }
-//         }
-//     };
-// }
+/// Catch All error for bad libraries
+#[derive(Error, Debug)]
+pub enum RecipeError {
+    /// Unknown error, provide a `context()`
+    #[error("unknown error")]
+    Unknown,
+}
 
 #[wasm_bindgen]
 /// Given the contents of a website, The `application/ld+json` attribute is extracted,
 /// parsed, and converted in to a markdown document.
 pub fn get_ld_json(contents: &str) -> String {
+    match _get_ld_json(contents) {
+        Ok(val) => val,
+        Err(e) => {
+            dbg!(&e);
+            format!(
+                r#"Whoops! Something went wrong. This worker does not support that url :(.
+                        
+                    Technical Readout:
+                    {}"#,
+                e.to_string()
+            )
+        }
+    }
+}
+
+/// Given the contents of a website, The `application/ld+json` attribute is extracted,
+/// parsed, and converted in to a markdown document.
+pub fn _get_ld_json(contents: &str) -> anyhow::Result<String> {
     let document = Html::parse_document(contents);
-    let selector = res_unwrap! { Selector::parse(r#"script[type="application/ld+json"]"#) };
+    let selector = match Selector::parse(r#"script[type="application/ld+json"]"#) {
+        Ok(val) => val,
+        Err(_) => bail!("Coild not parse XPath Selector"),
+    };
     let ctx: Vec<String> = document
         .select(&selector)
         .map(|ctx| {
@@ -74,21 +79,21 @@ pub fn get_ld_json(contents: &str) -> String {
             text.join("")
         })
         .collect();
-    let as_txt = traverse_for_type_recipe(&ctx);
-    let as_recipe: LdRecipe<'_> = res_unwrap! { serde_json::from_str(&as_txt) };
+    let as_txt = traverse_for_type_recipe(&ctx)?;
+    let as_recipe: LdRecipe<'_> = serde_json::from_str(&as_txt)?;
     let mut builder = RecipeMarkdownBuilder::new(&as_recipe);
     let markdown: String = builder.build().into();
-    markdown.replace("\r\n", "\n")
+    Ok(markdown.replace("\r\n", "\n"))
 }
 
-fn traverse_for_type_recipe(ld_jsons: &[String]) -> String {
+fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
     let _recipe_str = serde_json::json!("Recipe");
     // Example: tests/ragu.json
     for content in ld_jsons {
-        let tree: serde_json::Value = serde_json::from_str(content).unwrap();
+        let tree: serde_json::Value = serde_json::from_str(content)?;
         if let Some(val) = tree.get("@type") {
             if val == &_recipe_str {
-                return content.to_string();
+                return Ok(content.to_string());
             }
         }
         // Example: tests/chocolate_olive_oil.json
@@ -99,7 +104,7 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> String {
         } else {
             continue;
         };
-        return val
+        return Ok(val
             .as_array()
             .unwrap()
             .iter()
@@ -107,9 +112,12 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> String {
             .collect::<Vec<_>>()
             .first()
             .unwrap()
-            .to_string();
+            .to_string());
     }
-    panic!("Invalid recipe!")
+    anyhow::bail!(format!(
+        "Recipe not found in ld+json\n{}",
+        ld_jsons.join("\n")
+    ))
 }
 
 #[cfg(test)]
@@ -173,7 +181,7 @@ mod tests {
 
     #[test]
     fn eggplant() {
-        let src = include_str!("../tests/eggplant-pizza.html");
+        let src = include_str!("../tests/eggplant-pizza.Html");
         let expected = include_str!("../tests/eggplant-pizza.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
@@ -182,6 +190,13 @@ mod tests {
     fn tenders() {
         let src = include_str!("../tests/bacon-wrapped-chicken-tenders.html");
         let expected = include_str!("../tests/tenders.md");
+        str_assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn biscotti() {
+        let src = include_str!("../tests/biscotti.html");
+        let expected = include_str!("../tests/biscotti.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
 }
