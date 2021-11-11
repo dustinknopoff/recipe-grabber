@@ -1,12 +1,12 @@
 [package]
 authors = ["Dustin Knopoff <rust@knopoff.dev>"]
 edition = "2021"
-homepage = "https://github.com/dustinknopoff/nytcooking-grabber"
+homepage = "https://github.com/dustinknopoff/recipe-grabber"
 include = ["src/**", "README.md", "LICENSE_MIT", "LICENSE_APACHE"]
 license = "MIT or Apache 2.0"
 name = "recipe-grabber"
 readme = "README.md"
-repository = "https://github.com/dustinknopoff/nytcooking-grabber"
+repository = "https://github.com/dustinknopoff/recipe-grabber"
 version = "0.2.0"
 
 [lib]

@@ -48,7 +48,7 @@ pub mod media {
     pub enum Image<'r> {
         String(Cow<'r, str>),
         Array(Vec<Cow<'r, str>>),
-        ArrayImage(Vec<ImageObject<'r>>),
+        ImgArray(Vec<ImageObject<'r>>),
         Url(ImageObject<'r>),
         Id(IdImage<'r>),
     }
@@ -66,7 +66,7 @@ pub mod media {
                 Image::Array(val) => val.first().unwrap().to_owned(),
                 Image::Url(val) => val.url.to_owned(),
                 Image::Id(val) => val.id.to_owned(),
-                Image::ArrayImage(val) => {
+                Image::ImgArray(val) => {
                     let mut val = val.clone();
                     val.sort();
                     val.last().unwrap().url.to_owned()

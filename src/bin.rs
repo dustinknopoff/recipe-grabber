@@ -1,6 +1,6 @@
 use std::{fs::File, io::Read};
 
-use nytcooking_grabber::get_ld_json;
+use recipe_grabber::get_ld_json;
 
 fn main() {
     let mut args = std::env::args();
