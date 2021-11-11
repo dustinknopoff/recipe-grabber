@@ -54,10 +54,10 @@ pub fn get_ld_json(contents: &str) -> String {
         Err(e) => {
             dbg!(&e);
             format!(
-                r#"Whoops! Something went wrong. This worker does not support that url :(.
-                        
-                    Technical Readout:
-                    {}"#,
+                r#"<p>Whoops! Something went wrong. This worker does not support that url :(.</p>
+<hr />
+<p>Technical Readout:</p>
+<pre>{}</pre>"#,
                 e.to_string()
             )
         }
@@ -104,20 +104,25 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
         } else {
             continue;
         };
-        return Ok(val
+        let recipe_in_graph = val
             .as_array()
             .unwrap()
             .iter()
             .filter(|graph_item| graph_item.get("@type") == Some(&_recipe_str))
-            .collect::<Vec<_>>()
-            .first()
-            .unwrap()
-            .to_string());
+            .collect::<Vec<_>>();
+        let recipe_in_graph = recipe_in_graph.first();
+        if let Some(recipe) = recipe_in_graph {
+            return Ok(recipe.to_string());
+        } else {
+            anyhow::bail!("Recipe not found in ld+json\n{}", ld_jsons.join("\n"))
+        }
     }
-    anyhow::bail!(format!(
-        "Recipe not found in ld+json\n{}",
-        ld_jsons.join("\n")
-    ))
+    let context = ld_jsons.join("\n");
+    if context.is_empty() {
+        anyhow::bail!("Site contains no Recipe Schema.")
+    } else {
+        anyhow::bail!("Recipe not found in ld+json\n{}", context)
+    }
 }
 
 #[cfg(test)]
@@ -198,5 +203,28 @@ mod tests {
         let src = include_str!("../tests/biscotti.html");
         let expected = include_str!("../tests/biscotti.md");
         str_assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn will_fail() {
+        let src = include_str!("../tests/will_fail.html");
+        let actual = get_ld_json(src);
+        let expected = r#"<p>Whoops! Something went wrong. This worker does not support that url :(.</p>
+<hr />
+<p>Technical Readout:</p>
+<pre>Site contains no Recipe Schema.</pre>"#;
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn will_fail_2() {
+        let src = include_str!("../tests/will_fail_2.html");
+        let actual = get_ld_json(src);
+        let expected = r#"<p>Whoops! Something went wrong. This worker does not support that url :(.</p>
+<hr />
+<p>Technical Readout:</p>
+<pre>Recipe not found in ld+json
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://butternutbakeryblog.com/#organization","name":"Butternut Bakery","url":"https://butternutbakeryblog.com/","sameAs":["https://www.facebook.com/butternutbakeryblog","https://www.instagram.com/butternutbakery/","https://www.pinterest.com/butternutbakery/"],"logo":{"@type":"ImageObject","@id":"https://butternutbakeryblog.com/#logo","inLanguage":"en-US","url":"https://butternutbakeryblog.com/wp-content/uploads/2018/05/Untitled-5-1.jpg","width":640,"height":340,"caption":"Butternut Bakery"},"image":{"@id":"https://butternutbakeryblog.com/#logo"}},{"@type":"WebSite","@id":"https://butternutbakeryblog.com/#website","url":"https://butternutbakeryblog.com/","name":"Butternut Bakery","description":"A Baking Blog Sharing Indulgent Recipes","publisher":{"@id":"https://butternutbakeryblog.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://butternutbakeryblog.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://butternutbakeryblog.com/flourless-chocolate-cake/#primaryimage","inLanguage":"en-US","url":"https://butternutbakeryblog.com/wp-content/uploads/2020/04/flourless-chocolate-cake.jpg","width":1200,"height":1800,"caption":"flourless chocolate cake sliced on parchment paper"},{"@type":"WebPage","@id":"https://butternutbakeryblog.com/flourless-chocolate-cake/#webpage","url":"https://butternutbakeryblog.com/flourless-chocolate-cake/","name":"Flourless Olive Oil Chocolate Cake | Butternut Bakery","isPartOf":{"@id":"https://butternutbakeryblog.com/#website"},"primaryImageOfPage":{"@id":"https://butternutbakeryblog.com/flourless-chocolate-cake/#primaryimage"},"datePublished":"2020-04-27T03:41:08+00:00","dateModified":"2020-04-27T03:41:10+00:00","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://butternutbakeryblog.com/flourless-chocolate-cake/"]}]},{"@type":"Article","@id":"https://butternutbakeryblog.com/flourless-chocolate-cake/#article","isPartOf":{"@id":"https://butternutbakeryblog.com/flourless-chocolate-cake/#webpage"},"author":{"@id":"https://butternutbakeryblog.com/#/schema/person/bc97cdfa6d8ac72d58a912b59a782147"},"headline":"Flourless Olive Oil Chocolate Cake","datePublished":"2020-04-27T03:41:08+00:00","dateModified":"2020-04-27T03:41:10+00:00","commentCount":"6","publisher":{"@id":"https://butternutbakeryblog.com/#organization"},"image":{"@id":"https://butternutbakeryblog.com/flourless-chocolate-cake/#primaryimage"},"articleSection":"Cakes and Cupcakes,Dairy Free or Vegan,Gluten Free","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://butternutbakeryblog.com/flourless-chocolate-cake/#respond"]}]},{"@type":["Person"],"@id":"https://butternutbakeryblog.com/#/schema/person/bc97cdfa6d8ac72d58a912b59a782147","name":"Jenna","image":{"@type":"ImageObject","@id":"https://butternutbakeryblog.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/895fe079b97e47c9f1618c05ad517df6?s=96&d=mm&r=g","caption":"Jenna"}}]}</pre>"#;
+        str_assert_eq!(actual, expected);
     }
 }

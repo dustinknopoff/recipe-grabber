@@ -2,6 +2,17 @@ addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
 
+const errorAsHTML = (inner) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+      <body>
+      ${inner}
+      </body>
+    </html>
+  `
+}
+
 /**
  * Fetch and log a request
  * @param {Request} request
@@ -17,14 +28,16 @@ async function handleRequest(request) {
     try {
       recipe_context = `${get_ld_json(data)}(${url})`;
     } catch (error) {
-      return new Response("Whoops! Something went wrong", {
+      return new Response(errorAsHTML(`<p>"Whoops! Something went wrong"</p>`), {
         status: 501,
+        headers: { "Content-Type": "text/html"}
       })
     }
 
     if (recipe_context.includes("Whoops! Something went wrong")) {
-      return new Response(recipe_context, {
+      return new Response(errorAsHTML(recipe_context), {
         status: 501,
+        headers: { "Content-Type": "text/html"}
       })
     }
 

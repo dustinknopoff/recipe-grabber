@@ -1,0 +1,122 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://butternutbakeryblog.com/#organization",
+            "name": "Butternut Bakery",
+            "url": "https://butternutbakeryblog.com/",
+            "sameAs": [
+                "https://www.facebook.com/butternutbakeryblog",
+                "https://www.instagram.com/butternutbakery/",
+                "https://www.pinterest.com/butternutbakery/"
+            ],
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "https://butternutbakeryblog.com/#logo",
+                "inLanguage": "en-US",
+                "url": "https://butternutbakeryblog.com/wp-content/uploads/2018/05/Untitled-5-1.jpg",
+                "width": 640,
+                "height": 340,
+                "caption": "Butternut Bakery"
+            },
+            "image": {
+                "@id": "https://butternutbakeryblog.com/#logo"
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://butternutbakeryblog.com/#website",
+            "url": "https://butternutbakeryblog.com/",
+            "name": "Butternut Bakery",
+            "description": "A Baking Blog Sharing Indulgent Recipes",
+            "publisher": {
+                "@id": "https://butternutbakeryblog.com/#organization"
+            },
+            "potentialAction": [
+                {
+                    "@type": "SearchAction",
+                    "target": "https://butternutbakeryblog.com/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            ],
+            "inLanguage": "en-US"
+        },
+        {
+            "@type": "ImageObject",
+            "@id": "https://butternutbakeryblog.com/flourless-chocolate-cake/#primaryimage",
+            "inLanguage": "en-US",
+            "url": "https://butternutbakeryblog.com/wp-content/uploads/2020/04/flourless-chocolate-cake.jpg",
+            "width": 1200,
+            "height": 1800,
+            "caption": "flourless chocolate cake sliced on parchment paper"
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://butternutbakeryblog.com/flourless-chocolate-cake/#webpage",
+            "url": "https://butternutbakeryblog.com/flourless-chocolate-cake/",
+            "name": "Flourless Olive Oil Chocolate Cake | Butternut Bakery",
+            "isPartOf": {
+                "@id": "https://butternutbakeryblog.com/#website"
+            },
+            "primaryImageOfPage": {
+                "@id": "https://butternutbakeryblog.com/flourless-chocolate-cake/#primaryimage"
+            },
+            "datePublished": "2020-04-27T03:41:08+00:00",
+            "dateModified": "2020-04-27T03:41:10+00:00",
+            "inLanguage": "en-US",
+            "potentialAction": [
+                {
+                    "@type": "ReadAction",
+                    "target": [
+                        "https://butternutbakeryblog.com/flourless-chocolate-cake/"
+                    ]
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://butternutbakeryblog.com/flourless-chocolate-cake/#article",
+            "isPartOf": {
+                "@id": "https://butternutbakeryblog.com/flourless-chocolate-cake/#webpage"
+            },
+            "author": {
+                "@id": "https://butternutbakeryblog.com/#/schema/person/bc97cdfa6d8ac72d58a912b59a782147"
+            },
+            "headline": "Flourless Olive Oil Chocolate Cake",
+            "datePublished": "2020-04-27T03:41:08+00:00",
+            "dateModified": "2020-04-27T03:41:10+00:00",
+            "commentCount": "6",
+            "publisher": {
+                "@id": "https://butternutbakeryblog.com/#organization"
+            },
+            "image": {
+                "@id": "https://butternutbakeryblog.com/flourless-chocolate-cake/#primaryimage"
+            },
+            "articleSection": "Cakes and Cupcakes,Dairy Free or Vegan,Gluten Free",
+            "inLanguage": "en-US",
+            "potentialAction": [
+                {
+                    "@type": "CommentAction",
+                    "name": "Comment",
+                    "target": [
+                        "https://butternutbakeryblog.com/flourless-chocolate-cake/#respond"
+                    ]
+                }
+            ]
+        },
+        {
+            "@type": [
+                "Person"
+            ],
+            "@id": "https://butternutbakeryblog.com/#/schema/person/bc97cdfa6d8ac72d58a912b59a782147",
+            "name": "Jenna",
+            "image": {
+                "@type": "ImageObject",
+                "@id": "https://butternutbakeryblog.com/#personlogo",
+                "inLanguage": "en-US",
+                "url": "https://secure.gravatar.com/avatar/895fe079b97e47c9f1618c05ad517df6?s=96&d=mm&r=g",
+                "caption": "Jenna"
+            }
+        }
+    ]
