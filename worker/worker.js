@@ -48,8 +48,8 @@ async function handleRequest(request) {
     return res;
   }
   return new Response(
-    "ERROR. No url passed to perform conversion to markdown",
-    { status: 400 }
+    errorAsHTML("<pre>No url passed to perform conversion to markdown</pre>"),
+    { status: 400, headers: { "Content-Type": "text/html"} }
   );
 }
 
