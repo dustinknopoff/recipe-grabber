@@ -4,10 +4,10 @@ edition = "2021"
 homepage = "https://github.com/dustinknopoff/nytcooking-grabber"
 include = ["src/**", "README.md", "LICENSE_MIT", "LICENSE_APACHE"]
 license = "MIT or Apache 2.0"
-name = "nytcooking-grabber"
+name = "recipe-grabber"
 readme = "README.md"
 repository = "https://github.com/dustinknopoff/nytcooking-grabber"
-version = "0.1.0"
+version = "0.2.0"
 
 [lib]
 crate-type = ["cdylib", "rlib"]

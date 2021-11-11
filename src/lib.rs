@@ -4,14 +4,20 @@
 //!
 //! ![build-and-check](https://github.com/dustinknopoff/nytcooking-grabber/workflows/build-and-check/badge.svg)
 //!
-//! Deployed to [Cloudflare](https://nytcooking-grabber.knopoff.workers.dev)
+//! Deployed to [Cloudflare](https://recipe-grabber.knopoff.workers.dev)
 //!
 //! Pass `/?url=<url>` to produce a markdown representation
 //!
 //! ## Currently supported sites:
 //!
 //! - [NYTimes Cooking](https://cooking.nytimes.com)
-//! - [Food and Wine](https://foodandwine.com)
+//! - [Food and Wine](https://foodandwine.com) (Some links)
+//! - [Food52](https://food52.com)
+//! - [AllRecipes](https://allrecipes.com)
+//! - [BBC Good Food](https://www.bbcgoodfood.com)
+//! - [Simply So Healthy](https://simplysohealthy.com)
+//!
+//! Most sites _should_ work
 //!
 
 pub(crate) mod duration;
@@ -46,8 +52,9 @@ pub enum RecipeError {
 }
 
 #[wasm_bindgen]
-/// Given the contents of a website, The `application/ld+json` attribute is extracted,
-/// parsed, and converted in to a markdown document.
+/// Wrapper around [`_get_ld_json`](crate::_get_ld_json) which HTML-ifies the result of extracting a recipe
+///
+/// Makes interop with wasm easier
 pub fn get_ld_json(contents: &str) -> String {
     match _get_ld_json(contents) {
         Ok(val) => val,
