@@ -2,6 +2,17 @@ addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
 
+const errorAsHTML = (inner) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+      <body>
+      ${inner}
+      </body>
+    </html>
+  `
+}
+
 /**
  * Fetch and log a request
  * @param {Request} request
@@ -13,16 +24,30 @@ async function handleRequest(request) {
     await wasm_bindgen(wasm);
 
     let data = await fetch(url).then((r) => r.text());
+    let recipe_context;
+    try {
+      recipe_context = `${get_ld_json(data)}(${url})`;
+    } catch (error) {
+      return new Response(errorAsHTML(`<p>"Whoops! Something went wrong"</p>`), {
+        status: 501,
+        headers: { "Content-Type": "text/html"}
+      })
+    }
 
-    const recipe_context = `${get_ld_json(data)}(${url})`;
+    if (recipe_context.includes("Whoops! Something went wrong")) {
+      return new Response(errorAsHTML(recipe_context), {
+        status: 501,
+        headers: { "Content-Type": "text/html"}
+      })
+    }
 
-    let res = new Response(recipe_context, { status: 200 });
+    let res = new Response(recipe_context, {
+      status: 200,
+      headers: { "Content-Type": "text/markdown" },
+    });
     return res;
   }
-  return new Response(
-    "ERROR. No url passed to perform conversion to markdown",
-    { status: 400 }
-  );
+  return Response.redirect("https://recipes-ssg.netlify.app/", 301)
 }
 
 function get(name, url) {
