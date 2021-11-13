@@ -1,0 +1,187 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://www.halfbakedharvest.com/#organization",
+            "name": "Half Baked Harvest",
+            "url": "https://www.halfbakedharvest.com/",
+            "sameAs": [
+                "https://www.facebook.com/hbharvest",
+                "http://instagram.com/halfbakedharvest",
+                "https://www.youtube.com/user/tieghangerard/videos",
+                "https://pinterest.com/hbharvest/",
+                "https://twitter.com/hbharvest"
+            ],
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "https://www.halfbakedharvest.com/#logo",
+                "inLanguage": "en-US",
+                "url": "https://www.halfbakedharvest.com/wp-content/uploads/2019/05/half-baked-harvest-square-logo.png",
+                "width": 600,
+                "height": 600,
+                "caption": "Half Baked Harvest"
+            },
+            "image": {
+                "@id": "https://www.halfbakedharvest.com/#logo"
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://www.halfbakedharvest.com/#website",
+            "url": "https://www.halfbakedharvest.com/",
+            "name": "Half Baked Harvest",
+            "description": "Made with Love",
+            "publisher": {
+                "@id": "https://www.halfbakedharvest.com/#organization"
+            },
+            "potentialAction": [
+                {
+                    "@type": "SearchAction",
+                    "target": "https://www.halfbakedharvest.com/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            ],
+            "inLanguage": "en-US"
+        },
+        {
+            "@type": "ImageObject",
+            "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#primaryimage",
+            "inLanguage": "en-US",
+            "url": "https://www.halfbakedharvest.com/wp-content/uploads/2020/02/Flourless-Chocolate-Espresso-Cake-1.jpg",
+            "width": 1200,
+            "height": 1800,
+            "caption": "Flourless Chocolate Espresso Cake | halfbakedharvest.com"
+        },
+        {
+            "@type": "WebPage",
+            "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#webpage",
+            "url": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/",
+            "name": "Flourless Chocolate Espresso Cake. - Half Baked Harvest",
+            "isPartOf": {
+                "@id": "https://www.halfbakedharvest.com/#website"
+            },
+            "primaryImageOfPage": {
+                "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#primaryimage"
+            },
+            "datePublished": "2020-02-11T09:00:18+00:00",
+            "dateModified": "2020-02-14T19:54:09+00:00",
+            "description": "Start the weekend off on a sweet romantic note with this Flourless Chocolate Espresso Olive Oil Cake...top with honey whipped ricotta for a creamy balance!",
+            "inLanguage": "en-US",
+            "potentialAction": [
+                {
+                    "@type": "ReadAction",
+                    "target": [
+                        "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/"
+                    ]
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#article",
+            "isPartOf": {
+                "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#webpage"
+            },
+            "author": {
+                "@id": "https://www.halfbakedharvest.com/#/schema/person/9b2904ad2a2c76cbcd62517659d460f7"
+            },
+            "headline": "Flourless Chocolate Espresso Cake.",
+            "datePublished": "2020-02-11T09:00:18+00:00",
+            "dateModified": "2020-02-14T19:54:09+00:00",
+            "commentCount": "108",
+            "publisher": {
+                "@id": "https://www.halfbakedharvest.com/#organization"
+            },
+            "image": {
+                "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#primaryimage"
+            },
+            "keywords": "Cake,Chocolate,Easy,holiday,quick,simple,valentines day",
+            "articleSection": "American,Cake,Cuisine + Inspiration,Desserts,Diet-Specific,Gluten-Free,Holidays + Seasonal,Italian,Quick + Easy,Recipes,Type of Meal,Valentine's Day,Winter",
+            "inLanguage": "en-US",
+            "potentialAction": [
+                {
+                    "@type": "CommentAction",
+                    "name": "Comment",
+                    "target": [
+                        "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#respond"
+                    ]
+                }
+            ]
+        },
+        {
+            "@type": [
+                "Person"
+            ],
+            "@id": "https://www.halfbakedharvest.com/#/schema/person/9b2904ad2a2c76cbcd62517659d460f7",
+            "name": "halfbakedharvest",
+            "image": {
+                "@type": "ImageObject",
+                "@id": "https://www.halfbakedharvest.com/#personlogo",
+                "inLanguage": "en-US",
+                "url": "https://secure.gravatar.com/avatar/49ee4a23a1d5dffb1944da32800bb254?s=96&d=mm&r=pg",
+                "caption": "halfbakedharvest"
+            }
+        },
+        {
+            "@context": "http://schema.org/",
+            "@type": "Recipe",
+            "name": "Flourless Chocolate Espresso Olive Oil Cake with Honey Whipped Ricotta.",
+            "author": {
+                "@type": "Person",
+                "name": "halfbakedharvest"
+            },
+            "description": "Don't let the flourless detail scare you away, this chocolate cake is insanely delicious...it's even gluten free!",
+            "datePublished": "2020-02-11T02:00:18+00:00",
+            "image": [
+                "https://www.halfbakedharvest.com/wp-content/uploads/2020/02/Flourless-Chocolate-Espresso-Cake-1.jpg",
+                "https://www.halfbakedharvest.com/wp-content/uploads/2020/02/Flourless-Chocolate-Espresso-Cake-1-500x500.jpg",
+                "https://www.halfbakedharvest.com/wp-content/uploads/2020/02/Flourless-Chocolate-Espresso-Cake-1-500x375.jpg",
+                "https://www.halfbakedharvest.com/wp-content/uploads/2020/02/Flourless-Chocolate-Espresso-Cake-1-480x270.jpg"
+            ],
+            "recipeYield": [
+                "8"
+            ],
+            "prepTime": "PT15M",
+            "cookTime": "PT30M",
+            "totalTime": "PT45M",
+            "recipeIngredient": [
+                "7 ounces dark chocolate ((75% - 85% dark))",
+                "1/2 cup extra virgin olive oil",
+                "5  large eggs, separated",
+                "3/4 cup granulated sugar",
+                "2 teaspoons espresso powder",
+                "1/2 teaspoon kosher salt",
+                "1 tablespoon vanilla extract",
+                "1/4 cup unsweetened cocoa powder",
+                "2 ounces semi-sweet or milk chocolate chunks",
+                "2 cups whole milk ricotta cheese",
+                "2 tablespoons honey",
+                "2 teaspoons vanilla extract"
+            ],
+            "recipeInstructions": [
+                {
+                    "@type": "HowToStep",
+                    "text": "1. Preheat the oven to 350 degrees F. Grease a 9-inch spring-form pan and line the bottom with parchment paper. 2. In a medium bowl, melt the dark chocolate and olive oil in the microwave until melted and smooth. Let cool 5 minutes. Whisk in the 5 egg yolks, sugar, cocoa powder, espresso powder, salt, and vanilla until combined. 3. In a large bowl, using an electric mixer, whip the egg whites on medium speed until stiff peaks form. Fold half of the whipped egg whites into the chocolate mix until just combined, fold in the remaining egg whites. Gently stir in the chocolate chunks. Transfer the batter to the prepared pan, spreading it in an even layer. Bake 25-30 minutes, until the center is no longer jiggly. Remove from the oven and let sit 10 minutes.4. To make the honey whipped ricotta. In the bowl of a food processor, combine the ricotta, honey, and vanilla. Pulse until smooth and creamy, about 2-3 minutes. Taste, adding more honey if needed to sweeten. Store leftovers in an airtight container at room temperature for up to one week.5. Serve the cake warm or at room temp, dusted with cocoa powder and dolloped with honey whipped ricotta. Store leftovers in an airtight container at room temperature for up to one week.",
+                    "name": "1. Preheat the oven to 350 degrees F. Grease a 9-inch spring-form pan and line the bottom with parchment paper. 2. In a medium bowl, melt the dark chocolate and olive oil in the microwave until melted and smooth. Let cool 5 minutes. Whisk in the 5 egg yolks, sugar, cocoa powder, espresso powder, salt, and vanilla until combined. 3. In a large bowl, using an electric mixer, whip the egg whites on medium speed until stiff peaks form. Fold half of the whipped egg whites into the chocolate mix until just combined, fold in the remaining egg whites. Gently stir in the chocolate chunks. Transfer the batter to the prepared pan, spreading it in an even layer. Bake 25-30 minutes, until the center is no longer jiggly. Remove from the oven and let sit 10 minutes.4. To make the honey whipped ricotta. In the bowl of a food processor, combine the ricotta, honey, and vanilla. Pulse until smooth and creamy, about 2-3 minutes. Taste, adding more honey if needed to sweeten. Store leftovers in an airtight container at room temperature for up to one week.5. Serve the cake warm or at room temp, dusted with cocoa powder and dolloped with honey whipped ricotta. Store leftovers in an airtight container at room temperature for up to one week.",
+                    "url": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#wprm-recipe-87126-step-0-0"
+                }
+            ],
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.47",
+                "ratingCount": "186"
+            },
+            "nutrition": {
+                "@type": "NutritionInformation",
+                "calories": "358 kcal",
+                "servingSize": "1 serving"
+            },
+            "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#recipe",
+            "isPartOf": {
+                "@id": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#article"
+            },
+            "mainEntityOfPage": "https://www.halfbakedharvest.com/flourless-chocolate-espresso-cake/#webpage"
+        }
+    ]
+}

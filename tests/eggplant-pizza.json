@@ -1,0 +1,138 @@
+{
+    "@context": "http:\/\/schema.org\/",
+    "@type": "Recipe",
+    "name": "Low-carb eggplant pizza",
+    "datePublished": "2016-01-30T11:25:35+01:00",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Diet Doctor",
+        "url": "https:\/\/www.dietdoctor.com"
+    },
+    "mainEntityOfPage": "https:\/\/www.dietdoctor.com\/recipes\/low-carb-eggplant-pizza",
+    "dateModified": "2021-01-26T13:07:20+01:00",
+    "image": [
+        {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.dietdoctor.com\/wp-content\/uploads\/2016\/01\/DD-21-2-200x200.jpg",
+            "width": 200,
+            "height": 200,
+            "author": {
+                "@type": "Person",
+                "name": "Emma Shevtzoff",
+                "url": "https:\/\/www.dietdoctor.com\/authors\/emma-shevtzoff",
+                "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2016\/01\/EmmaShevtzoff.jpg?auto=compress%2Cformat&w=1000&h=1500&fit=crop"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.dietdoctor.com\/wp-content\/uploads\/2016\/01\/DD-21-2-800x800.jpg",
+            "width": 800,
+            "height": 800,
+            "author": {
+                "@type": "Person",
+                "name": "Emma Shevtzoff",
+                "url": "https:\/\/www.dietdoctor.com\/authors\/emma-shevtzoff",
+                "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2016\/01\/EmmaShevtzoff.jpg?auto=compress%2Cformat&w=1000&h=1500&fit=crop"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.dietdoctor.com\/wp-content\/uploads\/2016\/01\/DD-21-2.jpg",
+            "width": 3601,
+            "height": 5401,
+            "author": {
+                "@type": "Person",
+                "name": "Emma Shevtzoff",
+                "url": "https:\/\/www.dietdoctor.com\/authors\/emma-shevtzoff",
+                "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2016\/01\/EmmaShevtzoff.jpg?auto=compress%2Cformat&w=1000&h=1500&fit=crop"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.dietdoctor.com\/wp-content\/uploads\/2016\/01\/DD-21-2-800x1200.jpg",
+            "width": 800,
+            "height": 1200,
+            "author": {
+                "@type": "Person",
+                "name": "Emma Shevtzoff",
+                "url": "https:\/\/www.dietdoctor.com\/authors\/emma-shevtzoff",
+                "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2016\/01\/EmmaShevtzoff.jpg?auto=compress%2Cformat&w=1000&h=1500&fit=crop"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.dietdoctor.com\/wp-content\/uploads\/2016\/01\/DD-21.jpg",
+            "width": 5137,
+            "height": 3425,
+            "author": {
+                "@type": "Person",
+                "name": "Emma Shevtzoff",
+                "url": "https:\/\/www.dietdoctor.com\/authors\/emma-shevtzoff",
+                "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2016\/01\/EmmaShevtzoff.jpg?auto=compress%2Cformat&w=1000&h=1500&fit=crop"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "url": "https:\/\/www.dietdoctor.com\/wp-content\/uploads\/2016\/01\/DD-21-800x534.jpg",
+            "width": 800,
+            "height": 534,
+            "author": {
+                "@type": "Person",
+                "name": "Emma Shevtzoff",
+                "url": "https:\/\/www.dietdoctor.com\/authors\/emma-shevtzoff",
+                "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2016\/01\/EmmaShevtzoff.jpg?auto=compress%2Cformat&w=1000&h=1500&fit=crop"
+            }
+        }
+    ],
+    "description": "If you love pizza \u2014 and who doesn\u2019t? \u2014 you\u2019re going to love this dish! Earthy eggplant makes the perfect crust for this <a href=\"https:\/\/www.dietdoctor.com\/low-carb\">low-carb<\/a> pizza. And all that gooey melted cheese makes it all even more delicious and fun to eat.",
+    "prepTime": "PT20M",
+    "cookTime": "PT1H0M",
+    "totalTime": "PT1H20M",
+    "recipeYield": 4,
+    "recipeCategory": "Meal",
+    "recipeInstructions": [
+        "1 Preheat the oven to 400\u00b0F (200\u00b0C).",
+        "2 Slice the eggplants lengthwise, about \u2153\u2013\u00bd inches (1 cm) thick. Coat with olive oil on both sides and place on a baking sheet lined with parchment paper. Bake for about 20 minutes or until slightly browned.",
+        "3 Fry garlic and onion in remaining olive oil until softened, about 3-4 minutes.",
+        "4 Add beef and saut\u00e9 until cooked through. Add tomato sauce, and season with salt and pepper. Let simmer for 10 minutes, or until warmed through.",
+        "5 Remove the eggplant slices from the oven and spread the meat mixture on top. Sprinkle with cheese and oregano. Place in the oven for about 10 minutes or until the cheese has melted.",
+        "6 Serve with a green salad dressed with olive oil."
+    ],
+    "recipeIngredient": [
+        "2 eggplant",
+        "1\/3 cup olive oil, for brushing and frying",
+        "2 garlic cloves, minced",
+        "1 yellow onion, chopped finely",
+        "3\/4 lb ground beef or ground turkey",
+        "3\/4 cup sugar-free tomato sauce",
+        "1 tsp salt",
+        "1\/2 tsp pepper",
+        "1\/2 tsp ground cinnamon (optional)",
+        "2 1\/2 cups mozzarella cheese, shredded ",
+        "1\/4 cup chopped fresh oregano"
+    ],
+    "nutrition": {
+        "@type": "NutritionInformation",
+        "servingSize": "1 serving",
+        "carbohydrateContent": "13.4 g",
+        "fatContent": "45.0 g",
+        "fiberContent": "8.9 g",
+        "proteinContent": "35.6 g",
+        "calories": "625.4 kcal"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "7",
+        "bestRating": "5",
+        "worstRating": "1"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Anne Aobadia",
+        "url": "https:\/\/www.dietdoctor.com\/authors\/anne-aobadia",
+        "image": "https:\/\/i.dietdoctor.com\/wp-content\/uploads\/2015\/11\/DD_Anne_rund.png?auto=compress%2Cformat&w=2358&h=2354&fit=crop"
+    },
+    "keywords": "Budget, family-friendly, ground beef, Pizza",
+    "suitableForDiet": "GlutenFreeDiet"
+}

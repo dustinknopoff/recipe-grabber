@@ -1,37 +1,53 @@
 [package]
-authors = ["Dustin Knopoff <dustinknopoff@gmail.com>"]
-edition = "2018"
-include = ["src/**"]
-name = "nytcooking-grabber"
-version = "0.1.0"
+authors = ["Dustin Knopoff <rust@knopoff.dev>"]
+edition = "2021"
+homepage = "https://github.com/dustinknopoff/recipe-grabber"
+include = ["src/**", "README.md", "LICENSE_MIT", "LICENSE_APACHE"]
+license = "MIT or Apache 2.0"
+name = "recipe-grabber"
+readme = "README.md"
+repository = "https://github.com/dustinknopoff/recipe-grabber"
+version = "0.2.0"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "recipe-grabber"
+path = "src/bin.rs"
 
 [features]
 default = ["console_error_panic_hook"]
 
 [dependencies]
-cfg-if = "0.1"
-wasm-bindgen = "0.2"
-
+cfg-if = "1.0"
+wasm-bindgen = {version = "0.2", features = ["serde-serialize"]}
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
 # all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
 # code size when deploying.
 console_error_panic_hook = {version = "0.1", optional = true}
-
 # `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
 # compared to the default allocator's ~10K. It is slower than the default
 # allocator, however.
-scraper = "0.12"
+anyhow = "1.0.45"
+lexical-core = "0.7"
+nom = "6.2"
+parking_lot_core = "=0.8.0"
+scraper = "0.12.0"
 serde = {version = "1.0", features = ["derive"]}
 serde_json = "1.0"
+thiserror = "1.0.30"
 wee_alloc = {version = "0.4", optional = true}
 
 [dev-dependencies]
-wasm-bindgen-test = "0.2"
+dissimilar = "1.0"
+wasm-bindgen-test = "0.3"
 
-[profile.release]
-# Tell `rustc` to optimize for small code size.
-opt-level = "s"
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-O2", "--enable-mutable-globals"]
+
+[profile.dev]
+# Disabling debug info speeds up builds a bunch,
+# and we don't rely on it for debugging that much.
+debug = 0

@@ -12,7 +12,7 @@ Serving hummus at the center of the table is common practice in the Middle East,
 
 Just like snack-time hummus, dinner hummus tastes best with pita (though if a gluten-free friend is joining the dinner table, I also make sure to have a sturdy gluten-free cracker on hand so they can dip with abandon). Start with pita that is either super fresh and plush or cut into wedges, drizzled with a little olive oil, and lightly toasted until crisp and golden. With a few pita rounds between us, my husband and I can swipe our way through an embarrassing amount of this hummus. With a glass of wine in hand and, if I’m feeling up to the task, a green salad on the table, dinner is served.
 
-Yields: 6 in 60m
+Yields: 6 in 60 minutes
 
 ## Ingredients
 - 2 (15.5-ounce) cans chickpeas, drained, 1/2 cup chickpea liquid reserved, divided
@@ -36,25 +36,23 @@ Yields: 6 in 60m
 - Chopped fresh flat-leaf parsley, za’atar, and toasted pine nuts, for serving
 
 ## Instructions
+
 1. Process chickpeas, tahini, oil, lemon juice, salt, and garlic in a food processor until a coarse paste forms, about 20 seconds, stopping to scrape down sides as needed
 2. With processor running, slowly pour 1/4 cup reserved chickpea liquid through food chute, and process until mostly smooth and creamy, about 1 minute and 30 seconds
-3. (If desired, add more chickpea liquid for looser hummus
-4. ) Add salt to taste
-5. Toss together chicken, cumin, paprika, salt, coriander, cinnamon, and pepper in a medium bowl until chicken is well coated
-6. Heat 2 tablespoons oil in a 10-inch high-sided skillet over medium-high
-7. Add chicken in an even layer; cook, undisturbed, until bottom of chicken is lightly browned, about 5 minutes
-8. Stir and cook, stirring occasionally, until chicken is cooked through, about 4 minutes; transfer to a medium bowl
-9. Reduce heat to medium
-10. Add onion and remaining 2 tablespoons oil; cook, stirring occasionally with a wooden spoon to loosen browned bits, until softened and lightly browned, about 15 minutes
-11. Stir in cauliflower, 1/3 cup water, and currants; cover and cook, stirring occasionally to loosen onions from bottom of pan, until cauliflower is tender and onions are caramelized, about 10 minutes
-12. Return chicken to pan, and cook until warmed through
-13. Season with salt to taste
-14. Spread hummus on a large serving platter, making a well in the hummus with the back of a spoon
-15. (Alternately, divide hummus among individual serving plates, and make a well in each
-16. ) Spoon the chicken and cauliflower mixture into the well (or individual wells)
-17. Garnish with parsley, za’atar, and pine nuts
-18. Drizzle with oil
-19. Serve immediately
-20. 
+3. (If desired, add more chickpea liquid for looser hummus.) Add salt to taste
+4. Toss together chicken, cumin, paprika, salt, coriander, cinnamon, and pepper in a medium bowl until chicken is well coated
+5. Heat 2 tablespoons oil in a 10-inch high-sided skillet over medium-high
+6. Add chicken in an even layer; cook, undisturbed, until bottom of chicken is lightly browned, about 5 minutes
+7. Stir and cook, stirring occasionally, until chicken is cooked through, about 4 minutes; transfer to a medium bowl
+8. Reduce heat to medium
+9. Add onion and remaining 2 tablespoons oil; cook, stirring occasionally with a wooden spoon to loosen browned bits, until softened and lightly browned, about 15 minutes
+10. Stir in cauliflower, 1/3 cup water, and currants; cover and cook, stirring occasionally to loosen onions from bottom of pan, until cauliflower is tender and onions are caramelized, about 10 minutes
+11. Return chicken to pan, and cook until warmed through
+12. Season with salt to taste
+13. Spread hummus on a large serving platter, making a well in the hummus with the back of a spoon
+14. (Alternately, divide hummus among individual serving plates, and make a well in each.) Spoon the chicken and cauliflower mixture into the well (or individual wells)
+15. Garnish with parsley, za’atar, and pine nuts
+16. Drizzle with oil
+17. Serve immediately.
 
 Source: [Dinner Hummus with Spiced Chicken and Cauliflower]
