@@ -1,0 +1,7 @@
+account_id = ""
+compatibility_date = "2021-11-11"
+name = "recipe-grabber"
+route = ""
+type = "rust"
+workers_dev = true
+zone_id = ""
