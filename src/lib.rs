@@ -77,7 +77,7 @@ pub fn _get_ld_json(contents: &str) -> anyhow::Result<String> {
     let document = Html::parse_document(contents);
     let selector = match Selector::parse(r#"script[type="application/ld+json"]"#) {
         Ok(val) => val,
-        Err(_) => bail!("Coild not parse XPath Selector"),
+        Err(_) => bail!("Could not parse XPath Selector"),
     };
     let ctx: Vec<String> = document
         .select(&selector)
@@ -126,7 +126,7 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
     }
     let context = ld_jsons.join("\n");
     if context.is_empty() {
-        anyhow::bail!("Site contains no Recipe Schema.")
+        anyhow::bail!("Site contains no Recipe Schema.\n\"{}\"", context)
     } else {
         anyhow::bail!("Recipe not found in ld+json\n{}", context)
     }
