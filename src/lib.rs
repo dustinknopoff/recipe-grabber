@@ -126,7 +126,7 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
     }
     let context = ld_jsons.join("\n");
     if context.is_empty() {
-        anyhow::bail!("Site contains no Recipe Schema.\n\"{}\"", context)
+        anyhow::bail!("Site contains no Recipe Schema.")
     } else {
         anyhow::bail!("Recipe not found in ld+json\n{}", context)
     }
@@ -209,6 +209,13 @@ mod tests {
     fn biscotti() {
         let src = include_str!("../tests/biscotti.html");
         let expected = include_str!("../tests/biscotti.md");
+        str_assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn ottolenghi() {
+        let src = include_str!("../tests/ottolenghi.html");
+        let expected = include_str!("../tests/ottolenghi.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
 
