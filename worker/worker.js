@@ -22,7 +22,7 @@ async function handleRequest(request) {
   if (url) {
     const { get_ld_json } = wasm_bindgen;
     await wasm_bindgen(wasm);
-    let data = await request.text();
+    let data = await (await request.formData()).get("html");
     if (!data) {
       data = await fetch(url).then((r) => r.text());
       if (data.includes("Please Wait... | Cloudflare")) {
@@ -55,7 +55,7 @@ async function handleRequest(request) {
     });
     return res;
   }
-  return Response.redirect("https://recipes.knopoff.dev/", 301)
+  return Response.redirect("https://recipes-ssg.netlify.app/", 301)
 }
 
 function get(name, url) {
