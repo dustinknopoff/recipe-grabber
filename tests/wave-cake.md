@@ -30,4 +30,4 @@ This flourless chocolate cloud cake is a poufy soufflé of a cake that caves in
 8. Run the tip of a knife around the edge of the cake, carefully remove the sides of the pan, and cut into wedges to serve.
 9. Store any leftovers airtight in the refrigerator—they won’t be very presentable but they’ll make a delicious moussey snack.
 
-Source: [Richard Sax’s Chocolate Cloud Cake](https://food52.com/recipes/78350-richard-sax-s-chocolate-cloud-cake)
+Source: [Richard Sax’s Chocolate Cloud Cake]
