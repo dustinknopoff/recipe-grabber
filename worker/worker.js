@@ -22,22 +22,30 @@ async function handleRequest(request) {
   if (url) {
     const { get_ld_json } = wasm_bindgen;
     await wasm_bindgen(wasm);
-
-    let data = await fetch(url).then((r) => r.text());
+    let data = await request.text();
+    if (!data) {
+      data = await fetch(url).then((r) => r.text());
+      if (data.includes("Please Wait... | Cloudflare")) {
+        return new Response(errorAsHTML(`<p>This site blocks scrapers. :(</p>`), {
+          status: 400,
+          headers: { "Content-Type": "text/html" }
+        })
+      }
+    }
     let recipe_context;
     try {
       recipe_context = `${get_ld_json(data)}(${url})`;
     } catch (error) {
       return new Response(errorAsHTML(`<p>"Whoops! Something went wrong"</p>`), {
-        status: 501,
-        headers: { "Content-Type": "text/html"}
+        status: 400,
+        headers: { "Content-Type": "text/html" }
       })
     }
 
     if (recipe_context.includes("Whoops! Something went wrong")) {
       return new Response(errorAsHTML(recipe_context), {
-        status: 501,
-        headers: { "Content-Type": "text/html"}
+        status: 400,
+        headers: { "Content-Type": "text/html" }
       })
     }
 
@@ -47,7 +55,7 @@ async function handleRequest(request) {
     });
     return res;
   }
-  return Response.redirect("https://recipes-ssg.netlify.app/", 301)
+  return Response.redirect("https://recipes.knopoff.dev/", 301)
 }
 
 function get(name, url) {

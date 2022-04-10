@@ -76,11 +76,7 @@ fn decimal_comma_number(input: &str) -> IResult<&str, f32> {
 fn value_with_designator(designator: &str) -> impl Fn(&str) -> IResult<&str, f32> + '_ {
     move |input| {
         terminated(
-            alt((
-                float,
-                decimal_comma_number,
-                map_res(digit1, |s: &str| f32::from_str(s)),
-            )),
+            alt((float, decimal_comma_number, map_res(digit1, f32::from_str))),
             tag(designator),
         )(input)
     }

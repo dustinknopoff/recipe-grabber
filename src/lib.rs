@@ -65,7 +65,7 @@ pub fn get_ld_json(contents: &str) -> String {
 <hr />
 <p>Technical Readout:</p>
 <pre>{}</pre>"#,
-                e.to_string()
+                e
             )
         }
     }
@@ -215,6 +215,13 @@ mod tests {
     #[test]
     fn ottolenghi() {
         let src = include_str!("../tests/ottolenghi.html");
+        let expected = include_str!("../tests/ottolenghi.md");
+        str_assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn wavecake() {
+        let src = include_str!("../tests/wave-cake.html");
         let expected = include_str!("../tests/ottolenghi.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
