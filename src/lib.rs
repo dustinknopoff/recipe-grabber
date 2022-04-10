@@ -222,7 +222,7 @@ mod tests {
     #[test]
     fn wavecake() {
         let src = include_str!("../tests/wave-cake.html");
-        let expected = include_str!("../tests/ottolenghi.md");
+        let expected = include_str!("../tests/wave-cake.md");
         str_assert_eq!(get_ld_json(src), expected);
     }
 
