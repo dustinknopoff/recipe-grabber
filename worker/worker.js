@@ -22,7 +22,11 @@ async function handleRequest(request) {
   if (url) {
     const { get_ld_json } = wasm_bindgen;
     await wasm_bindgen(wasm);
-    let data = await (await request.formData()).get("html");
+    let data;
+    if (request.method === "POST") {
+      data = await (await request.formData()).get("html");
+      console.log("Got form data!", data)
+    }
     if (!data) {
       data = await fetch(url).then((r) => r.text());
       if (data.includes("Please Wait... | Cloudflare")) {
