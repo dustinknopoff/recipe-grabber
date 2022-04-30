@@ -171,18 +171,16 @@ impl<'r> LdJson for LdRecipe<'r> {
         self.clean_total_time()
     }
     fn recipe_yield(&self) -> Option<std::borrow::Cow<'_, str>> {
-        if let Some(recipe_yield) = &self.recipe_yield {
-            Some(Cow::Owned(
-                recipe_yield
+        self.recipe_yield.as_ref().map(|inner| {
+            Cow::Owned(
+                inner
                     .get()
                     .to_owned()
                     .replace("Serves : ", "")
                     .trim()
                     .to_string(),
-            ))
-        } else {
-            None
-        }
+            )
+        })
     }
 
     fn ingredients(&self) -> Vec<std::borrow::Cow<'_, str>> {
