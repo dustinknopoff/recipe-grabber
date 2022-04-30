@@ -70,3 +70,11 @@ jobs:
 
       - name: Run wasm-pack build
         run: wasm-pack build --target web
+
+      - name: Compile
+        run: cargo test --no-run
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@1.3.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}

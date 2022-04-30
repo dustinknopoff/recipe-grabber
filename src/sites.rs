@@ -130,7 +130,7 @@ pub struct LdRecipe<'r> {
     #[serde(borrow)]
     pub(crate) total_time: Option<Cow<'r, str>>,
     #[serde(borrow)]
-    pub(crate) recipe_yield: TypesOrArray<'r>,
+    pub(crate) recipe_yield: Option<TypesOrArray<'r>>,
     #[serde(borrow)]
     pub(crate) recipe_ingredient: Vec<Cow<'r, str>>,
     pub(crate) recipe_instructions: RecipeInstructionKinds<'r>,
@@ -171,14 +171,18 @@ impl<'r> LdJson for LdRecipe<'r> {
         self.clean_total_time()
     }
     fn recipe_yield(&self) -> Option<std::borrow::Cow<'_, str>> {
-        Some(Cow::Owned(
-            self.recipe_yield
-                .get()
-                .to_owned()
-                .replace("Serves : ", "")
-                .trim()
-                .to_string(),
-        ))
+        if let Some(recipe_yield) = &self.recipe_yield {
+            Some(Cow::Owned(
+                recipe_yield
+                    .get()
+                    .to_owned()
+                    .replace("Serves : ", "")
+                    .trim()
+                    .to_string(),
+            ))
+        } else {
+            None
+        }
     }
 
     fn ingredients(&self) -> Vec<std::borrow::Cow<'_, str>> {

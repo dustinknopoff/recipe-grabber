@@ -227,6 +227,13 @@ mod tests {
     }
 
     #[test]
+    fn brisket() {
+        let src = include_str!("../tests/brisket.html");
+        let expected = include_str!("../tests/brisket.md");
+        str_assert_eq!(dbg!(get_ld_json(src)), expected);
+    }
+
+    #[test]
     fn will_fail() {
         let src = include_str!("../tests/will_fail.html");
         let actual = get_ld_json(src);
