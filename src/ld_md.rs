@@ -1,6 +1,6 @@
-use std::borrow::Cow;
-
 use crate::sites::RecipeInstructionKinds;
+use std::borrow::Cow;
+use std::fmt::Write as _;
 
 pub trait LdJson: Sized {
     /// A recipe title
@@ -45,36 +45,30 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
     }
 
     fn add_title(&mut self) -> &mut Self {
-        self.markdown
-            .to_mut()
-            .push_str(&format!("# {}\n\n", self.recipe.name()));
+        let _ = write!(self.markdown.to_mut(), "# {}\n\n", self.recipe.name());
         self
     }
 
     fn add_authors(&mut self) -> &mut Self {
-        self.markdown
-            .to_mut()
-            .push_str(&format!("By: {}\n\n", self.recipe.author()));
+        let _ = write!(self.markdown.to_mut(), "By: {}\n\n", self.recipe.author());
         self
     }
 
     fn add_image(&mut self) -> &mut Self {
         if let Some(val) = self.recipe.video() {
-            self.markdown
-                .to_mut()
-                .push_str(&format!("![]({})\n\n", val))
+            let _ = write!(self.markdown.to_mut(), "![]({})\n\n", val);
         } else {
-            self.markdown
-                .to_mut()
-                .push_str(&format!("![]({})\n\n", self.recipe.image()))
+            let _ = write!(self.markdown.to_mut(), "![]({})\n\n", self.recipe.image());
         };
         self
     }
 
     fn add_description(&mut self) -> &mut Self {
-        self.markdown
-            .to_mut()
-            .push_str(&format!("{}\n\n", self.recipe.description().trim()));
+        let _ = write!(
+            self.markdown.to_mut(),
+            "{}\n\n",
+            self.recipe.description().trim()
+        );
         self
     }
 
@@ -82,30 +76,33 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         if let (Some(r_yield), Some(r_total_time)) =
             (self.recipe.recipe_yield(), self.recipe.total_time())
         {
-            self.markdown
-                .to_mut()
-                .push_str(&format!("Yields: {} in {}\n\n", r_yield, r_total_time));
+            let _ = write!(
+                self.markdown.to_mut(),
+                "Yields: {} in {}\n\n",
+                r_yield,
+                r_total_time
+            );
         };
         self
     }
 
     fn add_ingredients(&mut self) -> &mut Self {
-        let mut out = String::from("## Ingredients\n");
+        let _ = writeln!(self.markdown.to_mut(), "## Ingredients");
         for item in self.recipe.ingredients().iter() {
-            out.push_str(&format!("- {}\n", item.trim()))
+            let _ = writeln!(self.markdown.to_mut(), "- {}", item.trim());
         }
-        out.push('\n');
-        self.markdown.to_mut().push_str(&out);
+        let _ = write!(self.markdown.to_mut(), "\n",);
         self
     }
 
+    #[allow(clippy::write_with_newline)]
     fn add_instructions(&mut self) -> &mut Self {
-        let mut out = String::from("## Instructions\n\n");
+        let _ = writeln!(self.markdown.to_mut(), "## Instructions\n");
         if let RecipeInstructionKinds::Sectioned(val) = self.recipe.instructions() {
             val.into_iter().for_each(|section| {
-                out.push_str(&format!("### {}\n\n", section.name));
+                let _ = writeln!(self.markdown.to_mut(), "### {}\n", section.name);
                 for (idx, item) in section.instructions.iter().enumerate() {
-                    out.push_str(&format!("{}. {}\n", idx + 1, item.text.trim()))
+                    let _ = writeln!(self.markdown.to_mut(), "{}. {}", idx + 1, item.text.trim());
                 }
             })
         } else {
@@ -127,18 +124,15 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
                 }
             };
             for (idx, item) in val.iter().enumerate() {
-                out.push_str(&format!("{}. {}\n", idx + 1, item.trim()))
+                let _ = writeln!(self.markdown.to_mut(), "{}. {}", idx + 1, item.trim());
             }
         }
-        out.push('\n');
-        self.markdown.to_mut().push_str(&out);
+        let _ = write!(self.markdown.to_mut(), "\n",);
         self
     }
 
     fn add_source_fragment(&mut self) -> &mut Self {
-        self.markdown
-            .to_mut()
-            .push_str(&format!("Source: [{}]", self.recipe.name()));
+        let _ = write!(self.markdown.to_mut(), "Source: [{}]", self.recipe.name());
         self
     }
 
