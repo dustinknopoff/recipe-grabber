@@ -1,7 +1,6 @@
 use std::fmt::Display;
 // Copied from https://github.com/PoiScript/iso8601-duration
 use std::str::FromStr;
-// use std::time::Duration as StdDuration;
 
 use nom::{
     branch::alt,
@@ -25,28 +24,6 @@ pub struct Duration {
 }
 
 impl Duration {
-    // fn new(year: f32, month: f32, day: f32, hour: f32, minute: f32, second: f32) -> Self {
-    //     Duration {
-    //         year,
-    //         month,
-    //         day,
-    //         hour,
-    //         minute,
-    //         second,
-    //     }
-    // }
-
-    // fn to_std(&self) -> StdDuration {
-    //     StdDuration::from_secs_f32(
-    //         self.year * 60. * 60. * 24. * 30. * 12.
-    //             + self.month * 60. * 60. * 24. * 30.
-    //             + self.day * 60. * 60. * 24.
-    //             + self.hour * 60. * 60.
-    //             + self.minute * 60.
-    //             + self.second,
-    //     )
-    // }
-
     pub fn parse(input: &str) -> Result<Duration, Err<(&str, ErrorKind)>> {
         let (_, duration) = all_consuming(preceded(
             tag("P"),

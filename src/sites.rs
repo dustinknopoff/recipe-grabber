@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 pub use sub_objects::*;
 
 use std::borrow::Cow;
-#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
 #[serde(untagged)]
 pub enum SingleOrArray<T: Clone> {
     Single(T),
@@ -21,7 +21,7 @@ impl<T: Clone> SingleOrArray<T> {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
 #[serde(untagged)]
 pub enum TypesOrArray<'t> {
     String(Cow<'t, str>),
@@ -43,7 +43,7 @@ pub mod media {
     use std::cmp::Ordering;
 
     use super::*;
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     #[serde(untagged)]
     pub enum Image<'r> {
         String(Cow<'r, str>),
@@ -53,7 +53,7 @@ pub mod media {
         Id(IdImage<'r>),
     }
 
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     pub struct IdImage<'r> {
         #[serde(rename = "@id")]
         id: Cow<'r, str>,
@@ -105,7 +105,7 @@ pub mod media {
         }
     }
 
-    #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+    #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
     pub struct Video<'v> {
         #[serde(borrow)]
         pub(crate) name: Cow<'v, str>,
@@ -117,7 +117,7 @@ pub mod media {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct LdRecipe<'r> {
     #[serde(borrow)]
@@ -202,13 +202,13 @@ impl<'r> LdJson for LdRecipe<'r> {
 
 pub mod sub_objects {
     use super::*;
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     pub struct AuthorObject<'a> {
         #[serde(borrow)]
         pub(crate) name: Cow<'a, str>,
     }
 
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     #[serde(untagged)]
     pub enum Author<'a> {
         #[serde(borrow)]
@@ -216,7 +216,7 @@ pub mod sub_objects {
         String(Cow<'a, str>),
     }
 
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     pub struct RecipeInstruction<'i> {
         #[serde(borrow)]
         pub text: Cow<'i, str>,
@@ -228,7 +228,7 @@ pub mod sub_objects {
         }
     }
 
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     pub struct HowToSection<'i> {
         #[serde(borrow)]
         pub(crate) name: Cow<'i, str>,
@@ -236,7 +236,7 @@ pub mod sub_objects {
         pub(crate) instructions: Vec<RecipeInstruction<'i>>,
     }
 
-    #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
+    #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
     #[serde(untagged)]
     pub enum RecipeInstructionKinds<'r> {
         #[serde(borrow)]
