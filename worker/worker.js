@@ -53,13 +53,11 @@ async function handleRequest(request) {
       })
     }
 
-    let res = new Response(recipe_context, {
+    return new Response(recipe_context, {
       status: 200,
       headers: { "Content-Type": "text/markdown" },
     });
-    return res;
   }
-  return Response.redirect("https://recipes-ssg.netlify.app/", 301)
 }
 
 function get(name, url) {
