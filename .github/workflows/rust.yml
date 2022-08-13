@@ -67,6 +67,8 @@ jobs:
 
       - name: install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+        env:
+          CARGO_TARGET_DIR: $(pwd)/target
 
       - name: Run wasm-pack build
         run: wasm-pack build --target web
