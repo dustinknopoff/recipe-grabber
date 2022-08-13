@@ -20,7 +20,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: stable
+          toolchain: beta
           override: true
       - uses: Swatinem/rust-cache@v1
       - name: Compile
@@ -39,7 +39,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: stable
+          toolchain: beta
           override: true
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v1
@@ -71,7 +71,7 @@ jobs:
       - name: Run wasm-pack build
         run: wasm-pack build --target web
 
-      - name: Compile
+      - name: Test
         run: cargo test --no-run
 
       - name: Publish

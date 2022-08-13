@@ -86,6 +86,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         self
     }
 
+    #[allow(clippy::write_with_newline)]
     fn add_ingredients(&mut self) -> &mut Self {
         let _ = writeln!(self.markdown.to_mut(), "## Ingredients");
         for item in self.recipe.ingredients().iter() {
