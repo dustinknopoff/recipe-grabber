@@ -93,6 +93,7 @@ pub fn _get_ld_json(contents: &str) -> anyhow::Result<String> {
     Ok(markdown.replace("\r\n", "\n"))
 }
 
+/// Walks a list of discovered ld+json strings for the object with content type "Recipe"
 fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
     let _recipe_str = serde_json::json!("Recipe");
     // Example: tests/ragu.json

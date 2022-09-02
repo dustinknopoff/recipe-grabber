@@ -2,6 +2,7 @@ use crate::sites::RecipeInstructionKinds;
 use std::borrow::Cow;
 use std::fmt::Write as _;
 
+/// Generic trait for building a Recipe from ld+json metadata
 pub trait LdJson: Sized {
     /// A recipe title
     fn name(&self) -> Cow<'_, str>;
@@ -137,6 +138,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         self
     }
 
+    #[inline(always)]
     pub fn build(&mut self) -> Cow<'r, str> {
         self.add_title()
             .add_authors()
