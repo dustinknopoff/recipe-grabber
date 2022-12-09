@@ -22,7 +22,7 @@ jobs:
           profile: minimal
           toolchain: beta
           override: true
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
       - name: Compile
         run: cargo test --no-run
       - name: Test
@@ -42,7 +42,7 @@ jobs:
           toolchain: beta
           override: true
           components: rustfmt, clippy
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
 
       - name: Run cargo clippy
         uses: actions-rs/cargo@v1
@@ -64,7 +64,7 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
 
       - name: Test
         run: cargo test --no-run
