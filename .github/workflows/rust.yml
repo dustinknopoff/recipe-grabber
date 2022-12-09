@@ -57,14 +57,12 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v2
 
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          target: wasm32-unknown-unknown
-          profile: minimal
-          toolchain: stable
-          override: true
+      - name: install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
       - uses: Swatinem/rust-cache@v2
+
+      - name: Run wasm-pack build
+        run: wasm-pack build --target web
 
       - name: Test
         run: cargo test --no-run
@@ -72,4 +70,5 @@ jobs:
       - name: Publish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: npm i wrangler && npx wrangler publish
