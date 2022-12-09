@@ -28,9 +28,11 @@ use anyhow::bail;
 use cfg_if::cfg_if;
 use ld_md::RecipeMarkdownBuilder;
 use scraper::{Html, Selector};
+
 use serde_json::Value;
 use sites::LdRecipe;
 use wasm_bindgen::prelude::*;
+use worker::*;
 
 cfg_if! {
     // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -131,6 +133,87 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
     } else {
         anyhow::bail!("Recipe not found in ld+json\n{}", context)
     }
+}
+
+fn log_request(req: &Request) {
+    console_log!(
+        "{} - [{}], located at: {:?}, within: {}",
+        Date::now().to_string(),
+        req.path(),
+        req.cf().coordinates().unwrap_or_default(),
+        req.cf().region().unwrap_or_else(|| "unknown region".into())
+    );
+}
+
+// We're able to specify a start event that is called when the WASM is initialized before any
+// requests. This is useful if you have some global state or setup code, like a logger. This is
+// only called once for the entire lifetime of the worker.
+#[event(start)]
+#[allow(missing_docs)]
+pub fn start() {
+    utils::set_panic_hook();
+}
+
+#[event(fetch)]
+/// Workers Main function
+pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> worker::Result<Response> {
+    log_request(&req);
+
+    let router = Router::new();
+    router
+        .get_async("/", |req, _ctx| async move {
+            let req_url = req.url().unwrap();
+            let query_param = req_url.query_pairs().find(|(key, _value)| key == "url");
+            if let Some((_, name)) = query_param {
+                let data = Fetch::Url(name.parse()?).send().await?.text().await?;
+                if data.contains("Cloudflare") {
+                    return Response::error(
+                        "The site you provided does not support scraping.",
+                        400,
+                    );
+                }
+                match _get_ld_json(&data) {
+                    Ok(recipe) => Response::ok(recipe).map(|res| {
+                        let mut headers: http::HeaderMap = req.headers().into();
+                        headers.append(
+                            "Content-Type",
+                            http::HeaderValue::from_static("text/markdown"),
+                        );
+                        res.with_headers(headers.into())
+                    }),
+                    Err(info) => Response::error(info.to_string(), 400),
+                }
+            } else {
+                Response::error("Bad Request", 400)
+            }
+        })
+        .post_async("/", |mut req, _ctx| async move {
+            let form = req.form_data().await?;
+            if let Some(entry) = form.get("html") {
+                match entry {
+                    FormEntry::Field(data) => match _get_ld_json(&data) {
+                        Ok(recipe) => Response::ok(recipe).map(|res| {
+                            let mut headers: http::HeaderMap = req.headers().into();
+                            headers.append(
+                                "Content-Type",
+                                http::HeaderValue::from_static("text/markdown"),
+                            );
+                            res.with_headers(headers.into())
+                        }),
+                        Err(info) => Response::error(info.to_string(), 400),
+                    },
+                    _ => Response::error("Bad Request", 400),
+                }
+            } else {
+                Response::error("Bad Request", 400)
+            }
+        })
+        .get("/worker-version", |_, ctx| {
+            let version = ctx.var("VERSION")?.to_string();
+            Response::ok(version)
+        })
+        .run(req, env)
+        .await
 }
 
 #[cfg(test)]

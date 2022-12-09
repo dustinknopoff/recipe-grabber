@@ -1,7 +1,10 @@
-account_id = ""
-compatibility_date = "2021-11-11"
 name = "recipe-grabber"
-route = ""
-type = "rust"
-workers_dev = true
-zone_id = ""
+main = "build/worker/shim.mjs"
+compatibility_date = "2022-01-20"
+
+[vars]
+VERSION = "0.3.0"
+WORKERS_RS_VERSION = "0.0.12"
+
+[build]
+command = "cargo install -q worker-build --version 0.0.7 && worker-build --release"
