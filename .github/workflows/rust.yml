@@ -60,23 +60,19 @@ jobs:
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
+          target: wasm32-unknown-unknown
           profile: minimal
           toolchain: stable
           override: true
       - uses: Swatinem/rust-cache@v1
 
-      - name: install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-        env:
-          CARGO_TARGET_DIR: $(pwd)/target
-
       - name: Run wasm-pack build
-        run: wasm-pack build --target web
+        run: cargo build
 
       - name: Test
         run: cargo test --no-run
 
       - name: Publish
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-        run: npm i @cloudflare/wrangler && npx wrangler publish
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: npm i wrangler && npx wrangler publish
