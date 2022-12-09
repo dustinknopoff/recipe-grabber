@@ -148,6 +148,6 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
             .add_ingredients()
             .add_instructions()
             .add_source_fragment();
-        self.markdown.to_owned()
+        self.markdown.clone()
     }
 }

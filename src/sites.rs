@@ -34,7 +34,7 @@ impl<'t> TypesOrArray<'t> {
         match self {
             TypesOrArray::String(val) => val.clone(),
             TypesOrArray::Number(val) => Cow::from(val.to_string()),
-            TypesOrArray::Array(val) => val.first().unwrap().to_owned(),
+            TypesOrArray::Array(val) => val.first().unwrap().clone(),
         }
     }
 }
@@ -62,14 +62,14 @@ pub mod media {
     impl<'r> Image<'r> {
         pub fn get(&self) -> Cow<'r, str> {
             match self {
-                Image::String(val) => val.to_owned(),
-                Image::Array(val) => val.first().unwrap().to_owned(),
-                Image::Url(val) => val.url.to_owned(),
-                Image::Id(val) => val.id.to_owned(),
+                Image::String(val) => val.clone(),
+                Image::Array(val) => val.first().unwrap().clone(),
+                Image::Url(val) => val.url.clone(),
+                Image::Id(val) => val.id.clone(),
                 Image::ImgArray(val) => {
                     let mut val = val.clone();
                     val.sort();
-                    val.last().unwrap().url.to_owned()
+                    val.last().unwrap().url.clone()
                 }
             }
         }
@@ -149,11 +149,11 @@ impl<'r> LdRecipe<'r> {
 
 impl<'r> LdJson for LdRecipe<'r> {
     fn name(&self) -> std::borrow::Cow<'_, str> {
-        self.name.to_owned()
+        self.name.clone()
     }
     fn description(&self) -> std::borrow::Cow<'_, str> {
         if let Some(desc) = &self.description {
-            desc.to_owned()
+            desc.clone()
         } else {
             Cow::from("")
         }
@@ -175,7 +175,7 @@ impl<'r> LdJson for LdRecipe<'r> {
             Cow::Owned(
                 inner
                     .get()
-                    .to_owned()
+                    .clone()
                     .replace("Serves : ", "")
                     .trim()
                     .to_string(),
@@ -196,7 +196,7 @@ impl<'r> LdJson for LdRecipe<'r> {
     }
 
     fn video(&self) -> Option<std::borrow::Cow<'_, str>> {
-        self.video.as_ref().map(|vid| vid.thumbnail_url.to_owned())
+        self.video.as_ref().map(|vid| vid.thumbnail_url.clone())
     }
 }
 
