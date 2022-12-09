@@ -3,7 +3,7 @@ main = "build/worker/shim.mjs"
 compatibility_date = "2022-01-20"
 
 [vars]
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 WORKERS_RS_VERSION = "0.0.12"
 
 [build]
