@@ -1,0 +1,93 @@
+            {
+                "@context": "https:\/\/schema.org\/",
+                "@type": "Recipe",
+                "name": "Sourdough Bagel",
+                "description": "My recipe for flavorful and chewy sourdough bagels with a thin and slightly crispy crust. Delicious topped with an everything bagel mix, coarse sea salt, oats, seeds, or anything else you can dream up!",
+                "author": {
+                    "@type": "Person",
+                    "name": "Maurizio Leo",
+                    "url": "https:\/\/www.theperfectloaf.com"
+                },
+                "image": [
+                    "https:\/\/www.theperfectloaf.com\/wp-content\/uploads\/2020\/06\/theperfectloaf-sourdough-bagel-title-2-225x225.jpg",
+                    "https:\/\/www.theperfectloaf.com\/wp-content\/uploads\/2020\/06\/theperfectloaf-sourdough-bagel-title-2-260x195.jpg",
+                    "https:\/\/www.theperfectloaf.com\/wp-content\/uploads\/2020\/06\/theperfectloaf-sourdough-bagel-title-2-320x180.jpg",
+                    "https:\/\/www.theperfectloaf.com\/wp-content\/uploads\/2020\/06\/theperfectloaf-sourdough-bagel-title-2.jpg"
+                ],
+                "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/",
+                "recipeIngredient": [
+                    "116g high protein flour",
+                    "58g water",
+                    "23g sourdough starter, ripe",
+                    "848g high protein flour",
+                    "472g water",
+                    "29g sugar, caster",
+                    "29g barley malt syrup",
+                    "18g salt",
+                    "7g diastatic malt",
+                    "197g levain"
+                ],
+                "recipeInstructions": [
+                    {
+                        "@type": "HowToStep",
+                        "text": "(the night before mixing, 9:30 p.m.)Mix all the Levain ingredients in a container and leave it at a warm temperature for 12 hours.",
+                        "name": "Levain",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-1"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "(9:30 a.m.)Add a splash of the mixing water, sugar, barley malt syrup, diastatic malt powder, and salt to a small bowl and mix together. To your stand mixer&#8217;s mixing bowl, add the malt syrup slurry, flour, water, and ripe levain. Mix on low speed for approximately 5 minutes until the dough strengthens and begins to smooth. Transfer your dough to a bulk fermentation container and cover.",
+                        "name": "Mix",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-2"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "(9:45 a.m. to 12:45 p.m.)Give this dough a single fold after 1 hour and 30 minutes into bulk fermentation.",
+                        "name": "Bulk Fermentation",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-3"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "(12:45 p.m.)Use a half baking sheet (so it fits into your refrigerator) to hold the 12 pieces of shaped dough. Spread a thin layer of cornmeal on the half sheet to prevent sticking. Divide the dough into twelve 125g pieces. First, degas the piece by tamping down a bit with your hand. Then, form the piece into a rough rectangle and cinch down from the top, so the dough ends up in a little tube. Roll the tube out to a 12&#8243; long tube. Wrap the dough around the backside of your hand and pinch it together in the front. Roll a few times on the counter to seal. Transfer to the cornmeal-dusted baking sheet. Repeat for remaining dough pieces.",
+                        "name": "Divide and Shape",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-4"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "(1:00 p.m. to 3:00 p.m.)Cover the baking sheet with a\u00a0large, reusable plastic bag and seal shut. Let the dough proof at room temperature, around 72-74\u00b0F (22-23\u00b0C), for 2 hours. The dough should puff up slightly after this time but not excessively. If the dough still feels very dense to the touch, give it another 15-30 minutes and check again. After 2 hours, place the covered baking sheet into the fridge overnight at around 39\u00b0F (4\u00b0C).",
+                        "name": "Proof",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-5"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "(9:30 a.m., Day Three)Oven prep:\u00a0Before you begin boiling your bagel dough, preheat your oven to 475\u00b0F (245\u00b0C) with convection or 500\u00b0F (260\u00b0C) without convection. Place one rack at the bottom third of the oven. Place a\u00a0baking stone\u00a0or\u00a0baking steel on the rack to preheat. Place a roasting pan on the bottom filled with lava rocks to prepare to steam. I also fill a cup of ice and place it next to my oven (I will pour this over the lava rocks to steam the oven).Boiling equipment prep: Fill a wide pot with water and bring to a low boil. Next to your stovetop, place a half baking sheet with a cooling rack inside, this will hold the wet bagels for a minute and allow them to drain. Next, line a full baking sheet with parchment paper \u2014 this will hold the dough as it bakes. Finally, grab any toppings you&#8217;d like (poppy, oat, everything bagel mix, sesame, etc.) and place them in bowls on your work surface.Boil: Once the water is at a low boil, boil the proofed sourdough bagel dough straight from the fridge, about 40 seconds per side. Using a spider strainer, transfer each piece to the cooling rack inside the baking sheet to drain while you boil the rest of the dough. Then, transfer the boiled bagels to the full baking sheet and top, if desired.",
+                        "name": "Boil and Top",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-6"
+                    },
+                    {
+                        "@type": "HowToStep",
+                        "text": "(9:45 a.m.)Slide the pan with all the bagel dough into the oven and pour the cup of ice over the roasting pan with lava rocks. Quickly close the oven.Bake at 475\u00b0F (245\u00b0C) convection (500\u00b0F (260\u00b0C) without convection) for 10 minutes with steam. After 10 minutes, vent the oven and remove the steaming pan, rotate the baking sheet 180\u00b0, and bake for 5 minutes longer. After this 5 minutes, turn the oven down to 450\u00b0F (235\u00b0C) and bake for 5 minutes longer for a total of 20 minutes. Remove the sheet when the bagels are nicely colored. Let cool 15-20 minutes on a wire rack.",
+                        "name": "Bake",
+                        "url": "https:\/\/www.theperfectloaf.com\/sourdough-bagel\/#instruction-step-7"
+                    }
+                ],
+                "prepTime": "PT24H",
+                "totalTime": "PT24H",
+                "recipeYield": [
+                    "12",
+                    "12 bagels"
+                ],
+                "video": {
+                    "@context": "http:\/\/schema.org",
+                    "@type": "VideoObject",
+                    "name": "Sourdough Bagel Shaping",
+                    "description": "A quick video showing how I shape my sourdough bagel dough. Each piece is scaled out to 125g.\n\nFor the recipe, visit:\nhttps:\/\/www.theperfectloaf.com\/sourdough-bagel",
+                    "embedUrl": "https:\/\/www.youtube.com\/embed\/ZxAV3NdW5AU?feature=oembed",
+                    "contentUrl": "https:\/\/www.youtube.com\/watch?v=ZxAV3NdW5AU",
+                    "thumbnailUrl": [
+                        "https:\/\/i.ytimg.com\/vi\/ZxAV3NdW5AU\/hqdefault.jpg"
+                    ],
+                    "uploadDate": "2020-06-22"
+                },
+                "datePublished": "2020-06-22"
+            }

@@ -113,7 +113,7 @@ pub mod media {
         pub(crate) description: Cow<'v, str>,
         #[serde(rename = "thumbnailUrl")]
         #[serde(borrow)]
-        pub(crate) thumbnail_url: Cow<'v, str>,
+        pub(crate) thumbnail_url: SingleOrArray<Cow<'v, str>>,
     }
 }
 
@@ -196,7 +196,9 @@ impl<'r> LdJson for LdRecipe<'r> {
     }
 
     fn video(&self) -> Option<std::borrow::Cow<'_, str>> {
-        self.video.as_ref().map(|vid| vid.thumbnail_url.clone())
+        self.video
+            .as_ref()
+            .map(|vid| vid.thumbnail_url.get().clone())
     }
 }
 

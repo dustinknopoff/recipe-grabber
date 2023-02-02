@@ -113,8 +113,6 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
         let recipe_in_graph = recipe_in_graph.first();
         if let Some(recipe) = recipe_in_graph {
             return Ok(recipe.to_string());
-        } else {
-            anyhow::bail!("Recipe not found in ld+json\n{}", ld_jsons.join("\n"))
         }
     }
     let context = ld_jsons.join("\n");
@@ -304,7 +302,14 @@ mod tests {
     fn brisket() {
         let src = include_str!("../tests/brisket.html");
         let expected = include_str!("../tests/brisket.md");
-        str_assert_eq!(dbg!(get_ld_json(src)), expected);
+        str_assert_eq!(get_ld_json(src), expected);
+    }
+
+    #[test]
+    fn bagel() {
+        let src = include_str!("../tests/sourdough-bagel.html");
+        let expected = include_str!("../tests/sourdough-bagel.md");
+        str_assert_eq!(get_ld_json(src), expected);
     }
 
     #[test]
