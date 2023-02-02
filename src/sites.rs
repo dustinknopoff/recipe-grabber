@@ -196,9 +196,7 @@ impl<'r> LdJson for LdRecipe<'r> {
     }
 
     fn video(&self) -> Option<std::borrow::Cow<'_, str>> {
-        self.video
-            .as_ref()
-            .map(|vid| vid.thumbnail_url.get().clone())
+        self.video.as_ref().map(|vid| vid.thumbnail_url.get())
     }
 }
 

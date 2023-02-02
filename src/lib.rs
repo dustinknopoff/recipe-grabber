@@ -56,8 +56,7 @@ pub fn get_ld_json(contents: &str) -> String {
                 r#"<p>Whoops! Something went wrong. This worker does not support that url :(.</p>
 <hr />
 <p>Technical Readout:</p>
-<pre>{}</pre>"#,
-                e
+<pre>{e}</pre>"#,
             )
         }
     }

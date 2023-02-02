@@ -57,7 +57,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
 
     fn add_image(&mut self) -> &mut Self {
         if let Some(val) = self.recipe.video() {
-            let _ = write!(self.markdown.to_mut(), "![]({})\n\n", val);
+            let _ = write!(self.markdown.to_mut(), "![]({val})\n\n");
         } else {
             let _ = write!(self.markdown.to_mut(), "![]({})\n\n", self.recipe.image());
         };
@@ -79,9 +79,7 @@ impl<'r, T: LdJson> RecipeMarkdownBuilder<'r, T> {
         {
             let _ = write!(
                 self.markdown.to_mut(),
-                "Yields: {} in {}\n\n",
-                r_yield,
-                r_total_time
+                "Yields: {r_yield} in {r_total_time}\n\n",
             );
         };
         self

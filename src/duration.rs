@@ -46,7 +46,7 @@ impl Display for Duration {
 
 fn decimal_comma_number(input: &str) -> IResult<&str, f32> {
     map_res(separated_pair(digit1, tag(","), digit1), |(a, b)| {
-        f32::from_str(&format!("{}.{}", a, b))
+        f32::from_str(&format!("{a}.{b}"))
     })(input)
 }
 
