@@ -122,3 +122,34 @@ fn parse_week_format(input: &str) -> IResult<&str, Duration> {
 fn _parse_extended_format(_input: &str) -> IResult<&str, Duration> {
     unimplemented!()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::Duration;
+
+    #[test]
+    pub fn simple() {
+        assert_eq!(
+            Duration::parse("PT50M").unwrap(),
+            Duration {
+                year: 0.0,
+                month: 0.0,
+                day: 0.0,
+                hour: 0.0,
+                minute: 50.0,
+                second: 0.0
+            }
+        );
+        assert_eq!(
+            Duration::parse("P0DT1H45M").unwrap(),
+            Duration {
+                year: 0.0,
+                month: 0.0,
+                day: 0.0,
+                hour: 1.0,
+                minute: 45.0,
+                second: 0.0
+            }
+        );
+    }
+}

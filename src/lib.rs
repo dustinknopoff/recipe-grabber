@@ -122,6 +122,7 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
     }
 }
 
+#[cfg(not(tarpaulin_include))]
 fn log_request(req: &Request) {
     console_log!(
         "{} - [{}], located at: {:?}, within: {}",
@@ -137,11 +138,13 @@ fn log_request(req: &Request) {
 // only called once for the entire lifetime of the worker.
 #[event(start)]
 #[allow(missing_docs)]
+#[cfg(not(tarpaulin_include))]
 pub fn start() {
     utils::set_panic_hook();
 }
 
 #[event(fetch)]
+#[cfg(not(tarpaulin_include))]
 /// Workers Main function
 pub async fn main(req: Request, env: Env, _ctx: worker::Context) -> worker::Result<Response> {
     log_request(&req);
