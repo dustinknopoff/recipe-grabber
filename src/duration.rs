@@ -13,7 +13,7 @@ use nom::{
     Err, IResult,
 };
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Default)]
 pub struct Duration {
     pub year: f32,
     pub month: f32,
@@ -25,12 +25,14 @@ pub struct Duration {
 
 impl Duration {
     pub fn parse(input: &str) -> Result<Duration, Err<(&str, ErrorKind)>> {
-        let (_, duration) = all_consuming(preceded(
+        if let Ok((_, duration)) = all_consuming(preceded(
             tag("P"),
             alt((parse_week_format, parse_basic_format)),
-        ))(input)
-        .unwrap();
-        Ok(duration)
+        ))(input) {
+            Ok(duration)
+        } else {
+            Ok(Duration::default())
+        }
     }
 }
 

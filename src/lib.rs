@@ -94,6 +94,11 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
             if val == &_recipe_str {
                 return Ok(content.to_string());
             }
+            if let Some(list_of_types) = val.as_array() {
+                if list_of_types.into_iter().any(|t| t == &_recipe_str) {
+                    return Ok(content.to_string());
+                }
+            }
         }
         // Example: tests/chocolate_olive_oil.json
         let val: &Value = if let Some(val) = tree.get("@graph") {
@@ -314,6 +319,15 @@ mod tests {
         str_assert_eq!(get_ld_json(src), expected);
     }
 
+        #[test]
+    fn brownie() {
+        let src = include_str!("../tests/brownies.html");
+        let expected = include_str!("../tests/brownies.md");
+        let actual =get_ld_json(src);
+        println!("{actual}");
+        str_assert_eq!(actual, expected);
+    }
+    
     #[test]
     fn will_fail() {
         let src = include_str!("../tests/will_fail.html");
