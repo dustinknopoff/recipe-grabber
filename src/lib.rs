@@ -95,7 +95,7 @@ fn traverse_for_type_recipe(ld_jsons: &[String]) -> anyhow::Result<String> {
                 return Ok(content.to_string());
             }
             if let Some(list_of_types) = val.as_array() {
-                if list_of_types.into_iter().any(|t| t == &_recipe_str) {
+                if list_of_types.iter().any(|t| t == &_recipe_str) {
                     return Ok(content.to_string());
                 }
             }
